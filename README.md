@@ -33,6 +33,10 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 ----
 
+<!--
+@TODO saber mais sobre o AWX Project https://github.com/ansible/awx (fititnt, 2019-06-29 04:15 BRT)
+-->
+
 ## Como usar o aguia-pescadora-ansible-playbooks
 
 ### Instalação do Ansible
@@ -53,6 +57,10 @@ sudo apt install ansible
 ```
 
 ## Executar o Playbook
+
+```bash
+ansible-playbook -i hosts aguia-pescadora.yml
+```
 
 _@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
 
