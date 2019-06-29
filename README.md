@@ -59,7 +59,7 @@ sudo apt install ansible
 ## Executar o Playbook
 
 ```bash
-ansible-playbook -i hosts aguia-pescadora.yml
+ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
 ```
 
 _@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_

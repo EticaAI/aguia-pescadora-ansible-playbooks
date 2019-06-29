@@ -1,11 +1,13 @@
 ---
 - name: Cluster Águia Pescadora da Etica.AI
-  hosts: eticaai_aguia_pescadora
+  hosts: all
   remote_user: root
 
   roles:
-#    - common
+    - common
 #    - mysql
 #    - nginx
 #    - php-fpm
 #    - wordpress
+
+# https://docs.ansible.com/ansible/latest/modules/hostname_module.html
