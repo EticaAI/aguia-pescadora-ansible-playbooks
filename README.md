@@ -1,5 +1,13 @@
 # aguia-pescadora-ansible-playbooks
 
+**[Trabalho em progresso] Infraestrutura como Código da
+[Águia Pescadora](https://https://aguia-pescadora.etica.ai/) com Playbooks de Ansible. Veja também
+[EticaAI/aguia-pescadora](https://github.com/EticaAI/aguia-pescadora)
+e o projeto original, [fititnt/cplp-aiops](https://github.com/fititnt/cplp-aiops).**
+
+O link para lista completa dos servidores da Etica.AI pode ser vista no painel da
+organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/orgs/EticaAI/projects/2) <sup>inglês</sup>_.
+
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
 ----
@@ -9,12 +17,16 @@
 - [aguia-pescadora-ansible-playbooks](#aguia-pescadora-ansible-playbooks)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [Instalação do Ansible](#instalação-do-ansible)
-    - [Documentação adicional sobre a pilha de soluções da Águia Pescadora](#documentação-adicional-sobre-a-pilha-de-soluções-da-águia-pescadora)
+    - [Executar o Playbook](#executar-o-playbook)
+- [Veja também](#veja-também)
+    - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
             - [Documentação Ansible-BR](#documentação-ansible-br)
             - [Documentação oficial do Ansible](#documentação-oficial-do-ansible)
         - [Kubernetes](#kubernetes)
             - [Documentação oficial do Kubernetes](#documentação-oficial-do-kubernetes)
+    - [Referência de projetos semelhantes](#referência-de-projetos-semelhantes)
+        - [Kubespray](#kubespray)
 - [Licença](#licença)
 
 <!-- /TOC -->
@@ -40,8 +52,13 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
+## Executar o Playbook
 
-## Documentação adicional sobre a pilha de soluções da Águia Pescadora
+_@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
+
+# Veja também
+
+## Referências sobre a pilha de soluções da Águia Pescadora
 
 ### Ansible
 
@@ -56,6 +73,20 @@ sudo apt install ansible
 #### Documentação oficial do Kubernetes
 
 - <https://kubernetes.io/docs/> <sup>(Inglês)</sup>
+
+<!--
+@TODO ver projetos extras de interesse potencial do usuário (fititnt, 2019-06-28 09:31 BRT)
+-->
+
+## Referência de projetos semelhantes
+
+### Kubespray
+
+Kubespray é mantido pelos grupos de interesse especial do Kubernetes e documenta
+como por um cluster de Kubernentes pronto para uso em produção
+
+- Ansible Playbook: <https://github.com/kubernetes-sigs/kubespray> <sup>(Inglês)</sup>
+- Documentação: <https://kubespray.io> <sup>(Inglês)</sup>
 
 # Licença
 
