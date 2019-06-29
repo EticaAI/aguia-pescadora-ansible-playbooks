@@ -1,2 +1,15 @@
 ---
 # tasks file for common
+
+- name: Set Hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+#- name: Prepara todos os hosts
+#  tasks:
+#  - name: Teste teste net-tools
+#    apt:
+#      name: '{{ item }}'
+#      state: installed
+#    with_items:
+#    - net-tools

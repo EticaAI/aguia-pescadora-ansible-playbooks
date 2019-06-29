@@ -10,4 +10,13 @@
 #    - php-fpm
 #    - wordpress
 
+  tasks:
+    - name: Seta hostname
+      debug:
+        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+    - name: test test
+      debug:
+        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+
 # https://docs.ansible.com/ansible/latest/modules/hostname_module.html
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#accessing-information-about-other-hosts-with-magic-variables
