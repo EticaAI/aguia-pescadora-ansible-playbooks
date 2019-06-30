@@ -1,0 +1,5 @@
+---
+# tasks file for alpha
+- name: Set Hostname
+  hostname:
+    name: "{{ inventory_hostname }}"

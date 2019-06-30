@@ -12,8 +12,7 @@
 
   tasks:
     - name: Seta hostname
-      debug:
-        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+      include: "{{ hostvar }}.yaml"
     - name: test test
       debug:
         msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}

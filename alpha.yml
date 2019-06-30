@@ -1,0 +1,13 @@
+---
+
+# ansible-playbook -i inventory/alpha/inventory.ini playbook.yml
+
+- name: Alpha
+  hosts: alpha
+  remote_user: root
+
+  roles:
+    - common
+
+# @see https://github.com/EticaAI/forum/issues/77
+# @see https://phoenixnap.com/kb/how-to-upgrade-debian-8-jessie-to-debian-9-stretch
