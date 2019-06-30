@@ -1,6 +1,6 @@
 # aguia-pescadora-ansible-playbooks
 
-**[Trabalho em progresso] Infraestrutura como Código da
+**![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Infraestrutura como Código da
 [Águia Pescadora](https://https://aguia-pescadora.etica.ai/) com Playbooks de Ansible. Veja também
 [EticaAI/aguia-pescadora](https://github.com/EticaAI/aguia-pescadora)
 e o projeto original, [fititnt/cplp-aiops](https://github.com/fititnt/cplp-aiops).**
@@ -10,6 +10,8 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
+[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks)
+
 ----
 
 <!-- TOC depthFrom:1 -->
@@ -18,6 +20,8 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [Instalação do Ansible](#instalação-do-ansible)
     - [Executar o Playbook](#executar-o-playbook)
+        - [1 nó](#1-nó)
+        - [etica.dev](#eticadev)
 - [Veja também](#veja-também)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
@@ -58,11 +62,22 @@ sudo apt install ansible
 
 ## Executar o Playbook
 
+_@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
+
+### 1 nó
+**Águia Pescadora tudo-em-um (1 VPS)**
+
+```bash
+# ...
+ansible-playbook -i inventory/... 1-node.yml
+```
+
+### etica.dev
+Este é o playbook usado em produção no etica.dev.
+
 ```bash
 ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
 ```
-
-_@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
 
 # Veja também
 

@@ -1,0 +1,11 @@
+---
+- name: Águia Pescadora tudo-em-um (1 VPS)
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+#    - mysql
+#    - nginx
+#    - php-fpm
+#    - wordpress
