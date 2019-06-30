@@ -1,0 +1,6 @@
+---
+# tasks file for 1-node-testserver
+# @see https://docs.ansible.com/ansible/latest/modules/apt_module.html
+
+- name: Include a play after another play
+  include: tsuru-requeriments-if-direct-on-vps.yml

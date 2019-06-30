@@ -1,0 +1,8 @@
+---
+# tsuru-requeriments-if-direct-on-vps.yml
+
+# Note: on Ubuntu 18.04. Maybe your system could have extra requeriments
+
+- name: Install the package "net-tools" (requre)
+  apt:
+    name: net-tools

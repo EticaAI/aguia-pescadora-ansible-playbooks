@@ -4,12 +4,13 @@
 # @see https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo/tsuru-inicializacao++
 # @see https://github.com/fititnt/cplp-aiops/blob/master/logbook/aguia-pescadora-charlie.sh
 
-- name: Águia Pescadora tudo-em-um (1 VPS)
+- name: Tsuru PaaS + OpenResty, 1 Nó "Tudo Em Um", Docker puro (sem Kubernetes)
   hosts: all
   remote_user: root
 
   roles:
     - common
+    - 1-node-testserver
 #    - mysql
 #    - nginx
 #    - php-fpm

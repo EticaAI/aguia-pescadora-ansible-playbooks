@@ -1,4 +1,4 @@
-# aguia-pescadora-ansible-playbooks
+# Ansible Playbooks da Águia Pescadora da Etica.AI
 
 **![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Infraestrutura como Código da
 [Águia Pescadora](https://https://aguia-pescadora.etica.ai/) com Playbooks de Ansible. Veja também
@@ -16,9 +16,12 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 <!-- TOC depthFrom:1 -->
 
-- [aguia-pescadora-ansible-playbooks](#aguia-pescadora-ansible-playbooks)
+- [Ansible Playbooks da Águia Pescadora da Etica.AI](#ansible-playbooks-da-águia-pescadora-da-eticaai)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
+    - [Requisitos](#requisitos)
+        - [Seu computador local](#seu-computador-local)
         - [Instalação do Ansible](#instalação-do-ansible)
+        - [Servidores remotos](#servidores-remotos)
     - [Executar o Playbook](#executar-o-playbook)
         - [1 nó](#1-nó)
         - [etica.dev](#eticadev)
@@ -32,6 +35,7 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
     - [Referência de projetos semelhantes](#referência-de-projetos-semelhantes)
         - [Kubespray](#kubespray)
 - [Licença](#licença)
+    - [Licença de aguia-pescadora-ansible-playbooks](#licença-de-aguia-pescadora-ansible-playbooks)
 
 <!-- /TOC -->
 
@@ -42,6 +46,10 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 -->
 
 ## Como usar o aguia-pescadora-ansible-playbooks
+
+## Requisitos
+
+### Seu computador local
 
 ### Instalação do Ansible
 Visite <https://docs.ansible.com/> e escolha uma forma de instalação mais
@@ -60,16 +68,23 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
+### Servidores remotos
+
+- Ubuntu Server 18.04 LTS
+    - Versão mais testada. Você pode tentar em outras.
+- Autenticação por chave privada
+    - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
+      chave privada usada no momento da instalação seja sem senha.
+
 ## Executar o Playbook
 
 _@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
 
 ### 1 nó
-**Águia Pescadora tudo-em-um (1 VPS)**
+Tsuru PaaS + OpenResty, 1 Nó "Tudo Em Um", Docker puro (sem Kubernetes)
 
 ```bash
-# ...
-ansible-playbook -i inventory/... 1-node.yml
+ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
 ```
 
 ### etica.dev
@@ -112,6 +127,10 @@ como por um cluster de Kubernentes pronto para uso em produção
 - Documentação: <https://kubespray.io> <sup>(Inglês)</sup>
 
 # Licença
+
+_@TODO: explicar sobre licenças extras (fititnt, 2019-06-30 05:53 BRT)_
+
+## Licença de aguia-pescadora-ansible-playbooks
 
 [![Domínio Público](img/public-domain.png)](UNLICENSE)
 

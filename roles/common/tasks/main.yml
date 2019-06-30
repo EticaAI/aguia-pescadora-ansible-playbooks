@@ -5,6 +5,8 @@
   hostname:
     name: "{{ inventory_hostname }}"
 
+# sudo timedatectl set-timezone UTC
+
 #- name: Prepara todos os hosts
 #  tasks:
 #  - name: Teste teste net-tools
