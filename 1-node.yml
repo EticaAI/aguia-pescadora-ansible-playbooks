@@ -1,4 +1,9 @@
 ---
+
+# @see https://github.com/EticaAI/aguia-pescadora/issues/5
+# @see https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo/tsuru-inicializacao++
+# @see https://github.com/fititnt/cplp-aiops/blob/master/logbook/aguia-pescadora-charlie.sh
+
 - name: Águia Pescadora tudo-em-um (1 VPS)
   hosts: all
   remote_user: root
