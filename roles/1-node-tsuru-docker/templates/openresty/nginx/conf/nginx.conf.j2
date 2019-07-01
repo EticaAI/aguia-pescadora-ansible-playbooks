@@ -124,7 +124,7 @@ http {
     # Aqui repassamos *.app.etica.dev e *.nip.io para o Tsuru apps criados pelo usuario
     server {
         listen 443 ssl;
-        server_name  *.app.etica.dev *.nip.io;
+        server_name  *.{{ inventory_hostname }} *.nip.io;
 
         location = /favicon.ico { access_log off; log_not_found off; }
         location = /robots.txt  { access_log off; log_not_found off; }
@@ -175,7 +175,7 @@ http {
             index  index.html index.htm;
         }
 
-        #error_page  404              /404.html;
+        error_page  404              /404.html;
 
         # redirect server error pages to the static page /50x.html
         #

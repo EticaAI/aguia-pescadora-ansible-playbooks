@@ -1,6 +1,9 @@
 ---
 # openresty-luarocks-lua-resty-auto-ssl-install.yml
 
+# openresty errors:
+# tail -f /usr/local/openresty/nginx/logs/error.log
+
 
 ## openresty? luarocks? lua-resty-auto-ssl? ____________________________________
 - name: "openresty?"
@@ -81,4 +84,4 @@
   shell: openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj '/CN=sni-support-required-for-valid-ssl' -keyout /etc/ssl/resty-auto-ssl-fallback.key -out /etc/ssl/resty-auto-ssl-fallback.crt
   become: yes
   register: is_restyautossl_fallbackkey
-  # when: is_restyautossl is failed
+  when: is_restyautossl is failed

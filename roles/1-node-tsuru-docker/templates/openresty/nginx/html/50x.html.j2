@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Error</title>
+<title>Error {{ inventory_hostname }}</title>
 <style>
     body {
         width: 35em;
@@ -17,5 +17,6 @@ Please try again later.</p>
 <p>If you are the system administrator of this resource then you should check
 the <a href="http://nginx.org/r/error_log">error log</a> for details.</p>
 <p><em>Faithfully yours, OpenResty.</em></p>
+<p>{{ inventory_hostname }}</p>
 </body>
 </html>

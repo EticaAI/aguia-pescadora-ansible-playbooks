@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>aguia-pescadora-delta.etica.ai</title>
+<title>{{ inventory_hostname }}</title>
+<meta name="robots" content="noindex">
 <style>
     body {
         width: 35em;
@@ -11,7 +12,7 @@
 </style>
 </head>
 <body>
-<h1>aguia-pescadora-delta.etica.ai</h1>
+<h1>{{ inventory_hostname }}</h1>
 <p>If you see this page, the OpenResty web platform is successfully installed and
 working. Further configuration is required.</p>
 
@@ -21,5 +22,6 @@ Commercial support is available at
 <a href="https://openresty.com/">openresty.com</a>.</p>
 
 <p><em>Thank you for flying OpenResty.</em></p>
+<p>{{ inventory_hostname }}</p>
 </body>
 </html>

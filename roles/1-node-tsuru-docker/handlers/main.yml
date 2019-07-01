@@ -1,2 +1,10 @@
 ---
 # handlers file for 1-node-testserver
+
+
+- name: reload openresty
+  service: name=openresty state=reloaded
+
+- name: restart openresty
+  service: name=openresty state=restarted
+
