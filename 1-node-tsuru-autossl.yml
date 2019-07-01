@@ -25,7 +25,7 @@
       register: result3
       ignore_errors: false
 
-- name: Tsuru PaaS + OpenResty, 1 Nó "Tudo Em Um", Docker puro (sem Kubernetes)
+- name: "Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty)"
   hosts: all
   remote_user: root
   vars:
@@ -35,4 +35,5 @@
 
   roles:
     - common
+    - minio
     - 1-node-tsuru-autossl

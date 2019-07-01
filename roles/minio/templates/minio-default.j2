@@ -1,0 +1,9 @@
+# Based on https://raw.githubusercontent.com/minio/minio-service/master/linux-systemd/minio.service
+# File: /etc/default/minio
+
+# MINIO_VOLUMES ?
+# MINIO_OPTS ?
+
+
+MINIO_VOLUMES="/usr/local/share/minio/"
+MINIO_OPTS="-C /etc/minio --address minio.example.com:443"

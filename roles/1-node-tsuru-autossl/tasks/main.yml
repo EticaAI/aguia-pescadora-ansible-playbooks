@@ -5,8 +5,9 @@
 - name: Instalação de OpenResty, Lua Rest & Lua Resty AutoSSL (faz o HTTPS para os Apps)
   include: openresty-luarocks-lua-resty-auto-ssl-install.yml
 
-- name: Instalação do Minio
-  include: minio-install.yml
+# Movido para role dedicado
+#- name: Instalação do Minio
+#  include: minio-install.yml
 
 - name: Arquivos padrões do OpenResty
   include: openresty-default-files.yml

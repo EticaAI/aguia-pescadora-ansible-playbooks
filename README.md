@@ -77,7 +77,8 @@ reuso por colegas. Grato pela compreensão :).
 
 #### 1-node-tsuru-autossl
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
-Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
+Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty).
+Esta opção não usa Kubernetes ou k3s.
 
 ```bash
 ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node-tsuru-autossl.yml

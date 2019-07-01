@@ -1,2 +1,20 @@
 ---
 # tasks file for minio
+
+- name: group minio
+  group:
+    name: minio-user
+    state: present
+
+- name: sudo useradd --system minio-user --shell /sbin/nologin
+  user:
+    name: minio-user
+    group: minio-user
+
+# curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio
+
+# sudo chmod +x minio
+
+# sudo mv minio /usr/local/bin
+
+# sudo mv minio.service /etc/systemd/system
