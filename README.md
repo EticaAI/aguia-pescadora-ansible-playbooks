@@ -12,19 +12,30 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 [![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks)
 
-----
+---
+
+**TL;DR**
+
+```bash
+# TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
+# @see https://github.com/EticaAI/aguia-pescadora/issues/27
+git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
+ansible-playbook tldr.yml -e tsuru_host=tsuru.example.com
+```
+
+---
 
 <!-- TOC depthFrom:1 -->
 
 - [Ansible Playbooks da Águia Pescadora da Etica.AI](#ansible-playbooks-da-águia-pescadora-da-eticaai)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
-    - [Requisitos](#requisitos)
-        - [Seu computador local](#seu-computador-local)
-        - [Instalação do Ansible](#instalação-do-ansible)
-        - [Servidores remotos](#servidores-remotos)
-    - [Executar os Playbooks](#executar-os-playbooks)
-        - [1-node-tsuru-docker](#1-node-tsuru-docker)
-        - [etica.dev](#eticadev)
+        - [Executar os Playbooks](#executar-os-playbooks)
+            - [1-node-tsuru-docker](#1-node-tsuru-docker)
+            - [etica.dev](#eticadev)
+        - [Requisitos](#requisitos)
+            - [Seu computador local](#seu-computador-local)
+            - [Instalação do Ansible](#instalação-do-ansible)
+            - [Servidores remotos](#servidores-remotos)
 - [Veja também](#veja-também)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
@@ -41,29 +52,38 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 ----
 
-**TL;DR**
-
-```bash
-# TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
-# @see https://github.com/EticaAI/aguia-pescadora/issues/27
-git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
-ansible-playbook -i tsuru.example.com 1-node.yml
-
-```
-
-----
-
 <!--
 @TODO saber mais sobre o AWX Project https://github.com/ansible/awx (fititnt, 2019-06-29 04:15 BRT)
 -->
 
 ## Como usar o aguia-pescadora-ansible-playbooks
 
-## Requisitos
+### Executar os Playbooks
+A pessoa mantenedora, Emerson Rocha, recentemente começou a usar Ansible e ainda
+está convertendo scripts e estratégias para o novo padrão. Pode levar um tempo
+até implementação desse nível de automação, porém pode ajudar em especial
+reuso por colegas. Grato pela compreensão :).
 
-### Seu computador local
+#### 1-node-tsuru-docker
+![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
+Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
 
-### Instalação do Ansible
+```bash
+ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
+```
+
+#### etica.dev
+![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
+
+```bash
+ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
+```
+
+### Requisitos
+
+#### Seu computador local
+
+#### Instalação do Ansible
 Visite <https://docs.ansible.com/> e escolha uma forma de instalação mais
 apropriada para seu sistema operacional e instale no seu computador local (ou
 no computador que remoto que pretende usar). Note que Ansible não requer agente
@@ -80,32 +100,19 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
-### Servidores remotos
+#### Servidores remotos
 
-- Ubuntu Server 18.04 LTS
-    - Versão mais testada. Você pode tentar em outras.
-- Autenticação por chave privada
+Note que o nível de automação que aguia-pescadora-ansible-playbooks fornece
+pode ser suficiente para ter uma versão de Águia Pescadora aceitavelmente ok
+e economizar pelo menos 80% de trabalho. **Isto é, ao usar estas rotinas o(s)
+servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
+
+- **Ubuntu Server 18.04 LTS**
+    - Versão mais testada. Você pode tentar em outras com alterações nestes
+      playbooks.
+- **Autenticação por chave privada**
     - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
-
-## Executar os Playbooks
-
-_@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
-
-### 1-node-tsuru-docker
-![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
-Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
-
-```bash
-ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
-```
-
-### etica.dev
-![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
-
-```bash
-ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
-```
 
 # Veja também
 

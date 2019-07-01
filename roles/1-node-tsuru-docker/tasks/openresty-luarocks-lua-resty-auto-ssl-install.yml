@@ -1,7 +1,6 @@
 ---
 # openresty-luarocks-lua-resty-auto-ssl-install.yml
 
-
 - name: software-properties-common é requerido pelo PPA de OpenResty
   apt:
     name: software-properties-common

@@ -1,7 +1,49 @@
-----
+---
 
 # Playbook construído para ser a tentativa mais fácil possível para alguém que
 # já sabe o que fazer mas não quer ler toda documentação
 
 # TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
 # @see https://github.com/EticaAI/aguia-pescadora/issues/27
+
+# ansible-lint tldr.yml
+# ansible-playbook tldr.yml -e tsuru_host=aguia-pescadora-delta.etica.ai
+
+
+# @see https://stackoverflow.com/questions/33222641/override-hosts-variable-of-ansible-playbook-from-the-command-line
+
+- name: tldr tsuru client? docker? docker-machine?
+  hosts: localhost
+  tasks:
+    - name: tsuru client? https://tsuru-client.readthedocs.io/en/latest/installing.html
+      shell: tsuru --version
+      register: result
+      ignore_errors: false
+
+    - name: docker? https://docs.docker.com/install/
+      shell: docker --version
+      register: result2
+      ignore_errors: false
+
+    - name: docker-machine? https://docs.docker.com/machine/install-machine/
+      shell: docker-machine version
+      register: result3
+      ignore_errors: false
+
+- name: tldr
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: modo para forçar servidor de destino como target
+    add_host:
+      name: "{{ tsuru_host }}"
+      groups: tsuru_host
+    changed_when: false
+
+- name: tldr, target
+  hosts: tsuru_host
+  gather_facts: false
+  tasks:
+    - name: teste se fucionou
+      debug:
+        msg: "I'm on {{ ansible_host }}"
