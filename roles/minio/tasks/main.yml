@@ -1,6 +1,8 @@
 ---
 # tasks file for minio
 
+# sudo su minio-user /usr/local/bin/minio --help
+
 - name: group minio
   group:
     name: minio-user
@@ -10,6 +12,62 @@
   user:
     name: minio-user
     group: minio-user
+
+- name: 'sudo mkdir /usr/local/share/minio; sudo chown minio-user:minio-user /usr/local/share/minio'
+  file:
+    state: directory
+    path: /usr/local/share/minio
+    owner: minio-user
+    group: minio-user
+  # when: is_restyautossl is failed
+
+- name: 'sudo mkdir /etc/minio; sudo chown minio-user:minio-user /etc/minio'
+  file:
+    state: directory
+    path: /etc/minio
+    owner: minio-user
+    group: minio-user
+  # when: is_restyautossl is failed
+
+- name: /etc/default/minio
+  template:
+    src: roles/minio/templates/minio-default.j2
+    dest: /etc/default/minio
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart minio
+
+- name: /etc/systemd/system/minio.service
+  template:
+    src: roles/minio/templates/minio.service.j2
+    dest: /etc/systemd/system/minio.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart minio
+
+- name: sudo systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: sudo systemctl enable minio
+  systemd:
+    name: minio
+    enabled: yes
+
+- name: Download minio, /usr/local/share/minio
+  get_url:
+    url: https://dl.minio.io/server/minio/release/linux-amd64/minio
+    # dest: /usr/local/share/minio
+    dest: /usr/local/bin/minio
+    group: minio-user
+    owner: minio-user
+    mode: '0500'
+  notify:
+    - restart minio
 
 # curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio
 

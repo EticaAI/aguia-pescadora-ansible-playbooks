@@ -28,6 +28,8 @@ ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
 > - Tsuru URLs:
 >   - https://tsuru.example.com
 >   - https://tsuru-dashboard.example.com
+> - Minio:
+>   - https://minio.example.com
 > - Apps URLs (_app.**{paas_host}**_):
 >   - https://meu-app-1.app.example.com
 >   - https://my-app2.app.example.com

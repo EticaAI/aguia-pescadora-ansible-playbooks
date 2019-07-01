@@ -1,2 +1,10 @@
 ---
 # defaults file for minio
+
+
+minio_domain: "minio.{{paas_host}}"
+minio_ip_port: "127.0.0.1:9000"
+
+MINIO_VOLUMES: "/usr/local/share/minio/"
+# MINIO_OPTS: "-C /etc/minio --address 127.0.0.1:9000"
+MINIO_OPTS: "-C /etc/minio --address {{ minio_ip_port }}"

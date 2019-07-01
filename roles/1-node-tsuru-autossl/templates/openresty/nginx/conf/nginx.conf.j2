@@ -144,6 +144,43 @@ http {
         }
     }
 
+    # Minio
+    # https://docs.min.io/docs/setup-nginx-proxy-with-minio.html
+    server {
+        listen 443 ssl;
+        server_name  {{ minio_domain }};
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+
+        # Dynamic handler for issuing or returning certs for SNI domains.
+        ssl_certificate_by_lua_block {
+          auto_ssl:ssl_certificate()
+        }
+        ssl_certificate /etc/ssl/resty-auto-ssl-fallback.crt;
+        ssl_certificate_key /etc/ssl/resty-auto-ssl-fallback.key;
+
+        ## @see # https://docs.min.io/docs/setup-nginx-proxy-with-minio.html
+        # To allow special characters in headers
+        ignore_invalid_headers off;
+        # Allow any size file to be uploaded.  
+        # Set to a value such as 1000m; to restrict file size to a specific value
+        client_max_body_size 0;
+        # To disable buffering
+
+        location / {
+            add_header X-Served-By $hostname;
+            proxy_ignore_client_abort on;
+            proxy_set_header Host $host;
+            
+            proxy_pass   http://{{ minio_ip_port }};
+            # health_check uri=/minio/health/ready;
+            # healt check é apenas NGinx Plus? Humm
+            # health_check uri=/some/path;
+            # health_check interval=10 fails=3 passes=2;
+        }
+    }
+
     # Aqui repassamos *.nip.io para o Tsuru apps criados pelo usuario
     # Note que dominios *.dev nem tem como ser acessados via HTTP comum
     server {

@@ -3,7 +3,9 @@
 
 # MINIO_VOLUMES ?
 # MINIO_OPTS ?
+# MINIO_OPTS="-C /etc/minio --address minio.example.com:443"
 
-
-MINIO_VOLUMES="/usr/local/share/minio/"
-MINIO_OPTS="-C /etc/minio --address minio.example.com:443"
+## MINIO_VOLUMES="/usr/local/share/minio/"
+MINIO_VOLUMES="{{ MINIO_VOLUMES }}"
+## MINIO_OPTS="-C /etc/minio --address 127.0.0.1:9000"
+MINIO_OPTS="{{ MINIO_OPTS }}"
