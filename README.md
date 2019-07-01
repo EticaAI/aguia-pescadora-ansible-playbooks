@@ -22,8 +22,8 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
         - [Seu computador local](#seu-computador-local)
         - [Instalação do Ansible](#instalação-do-ansible)
         - [Servidores remotos](#servidores-remotos)
-    - [Executar o Playbook](#executar-o-playbook)
-        - [1 nó](#1-nó)
+    - [Executar os Playbooks](#executar-os-playbooks)
+        - [1-node-tsuru-docker](#1-node-tsuru-docker)
         - [etica.dev](#eticadev)
 - [Veja também](#veja-também)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
@@ -38,6 +38,18 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
     - [Licença de aguia-pescadora-ansible-playbooks](#licença-de-aguia-pescadora-ansible-playbooks)
 
 <!-- /TOC -->
+
+----
+
+**TL;DR**
+
+```bash
+# TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
+# @see https://github.com/EticaAI/aguia-pescadora/issues/27
+git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
+ansible-playbook -i tsuru.example.com 1-node.yml
+
+```
 
 ----
 
@@ -76,19 +88,20 @@ sudo apt install ansible
     - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
 
-## Executar o Playbook
+## Executar os Playbooks
 
 _@TODO: documentar como executar o playbook (fititnt, 2019-06-28 09:34 BRT)_
 
-### 1 nó
-Tsuru PaaS + OpenResty, 1 Nó "Tudo Em Um", Docker puro (sem Kubernetes)
+### 1-node-tsuru-docker
+![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
+Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
 
 ```bash
 ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
 ```
 
 ### etica.dev
-Este é o playbook usado em produção no etica.dev.
+![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
 
 ```bash
 ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
