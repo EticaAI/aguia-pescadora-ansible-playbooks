@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Emerson Rocha
+  description: Minio
+  company: Etica.AI
+
+  license: Unlicense
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - bionic
+
+  galaxy_tags: []
+
+dependencies: []

@@ -14,22 +14,25 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 ---
 
-**TL;DR**
+**TL;DR:**
+
+Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
 
 ```bash
 # TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
 # @see https://github.com/EticaAI/aguia-pescadora/issues/27
 git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
-ansible-playbook tldr.yml -e paas_host=example.com
+ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
 ```
-**Resultado ao final do TL;DR:**
-- Tsuru URLs:
-  - https://tsuru.example.com
-  - https://tsuru-dashboard.example.com
-- Apps
-  - https://meu-app-1.app.example.com
-  - https://my-app2.app.example.com
-  - https://mi-aplicación-tre.app.example.com
+
+> - Tsuru URLs:
+>   - https://tsuru.example.com
+>   - https://tsuru-dashboard.example.com
+> - Apps URLs (_app.**{paas_host}**_):
+>   - https://meu-app-1.app.example.com
+>   - https://my-app2.app.example.com
+>   - https://mi-aplicación-tre.app.example.com
+>   - ...
 
 ---
 
@@ -42,7 +45,7 @@ ansible-playbook tldr.yml -e paas_host=example.com
             - [etica.dev](#eticadev)
         - [Requisitos](#requisitos)
             - [Seu computador local](#seu-computador-local)
-            - [Instalação do Ansible](#instalação-do-ansible)
+                - [Instalação do Ansible](#instalação-do-ansible)
             - [Servidores remotos](#servidores-remotos)
 - [Veja também](#veja-também)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
@@ -94,7 +97,7 @@ ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
 
 #### Seu computador local
 
-#### Instalação do Ansible
+##### Instalação do Ansible
 Visite <https://docs.ansible.com/> e escolha uma forma de instalação mais
 apropriada para seu sistema operacional e instale no seu computador local (ou
 no computador que remoto que pretende usar). Note que Ansible não requer agente
