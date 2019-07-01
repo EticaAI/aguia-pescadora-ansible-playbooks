@@ -10,7 +10,7 @@
 
   roles:
     - common
-    - 1-node-testserver
+    - 1-node-tsuru-docker
 #    - mysql
 #    - nginx
 #    - php-fpm

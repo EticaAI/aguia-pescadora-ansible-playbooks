@@ -5,10 +5,10 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Upgrade all packages to the latest version
-  apt:
-    name: "*"
-    state: latest
+#- name: Upgrade all packages to the latest version
+#  apt:
+#    name: "*"
+#    state: latest
 
 - name: Install the package "net-tools" (requre)
   apt:

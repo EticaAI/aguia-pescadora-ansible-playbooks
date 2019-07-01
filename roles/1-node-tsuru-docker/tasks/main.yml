@@ -2,5 +2,9 @@
 # tasks file for 1-node-testserver
 # @see https://docs.ansible.com/ansible/latest/modules/apt_module.html
 
-- name: Include a play after another play
+- name: Instalação de OpenResty, Lua Rest & Lua Resty AutoSSL (faz o HTTPS para os Apps)
+  include: openresty-luarocks-lua-resty-auto-ssl-install.yml
+
+- name: Requerimentos do Tsuru caso seja instalado diretamente na VPS
   include: tsuru-requeriments-if-direct-on-vps.yml
+
