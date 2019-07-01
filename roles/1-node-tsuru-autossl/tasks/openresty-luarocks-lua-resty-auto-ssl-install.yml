@@ -29,13 +29,13 @@
   when: is_openresty is failed
 
 - name: "openresty: apt-key add"
-  apt_key: 
+  apt_key:
     url: https://openresty.org/package/pubkey.gpg 
     state: present
   when: is_openresty is failed
 
 - name: "openresty: add-apt-repository (...)"
-  apt_repository: 
+  apt_repository:
     repo: 'deb http://openresty.org/package/ubuntu bionic main' 
     state: present
     filename: openresty

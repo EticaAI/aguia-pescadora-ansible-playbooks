@@ -2,7 +2,7 @@
 
 - name: /usr/local/openresty/nginx/html/index.html
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/html/index.html.j2
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/html/index.html.j2
     dest: /usr/local/openresty/nginx/html/index.html
     owner: root
     group: root
@@ -10,7 +10,7 @@
 
 - name: /usr/local/openresty/nginx/html/favicon.ico
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/html/favicon.ico
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/html/favicon.ico
     dest: /usr/local/openresty/nginx/html/favicon.ico
     owner: root
     group: root
@@ -18,7 +18,7 @@
 
 - name: /usr/local/openresty/nginx/html/robots.txt
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/html/robots.txt
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/html/robots.txt
     dest: /usr/local/openresty/nginx/html/robots.txt
     owner: root
     group: root
@@ -26,7 +26,7 @@
 
 - name: /usr/local/openresty/nginx/html/404.html
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/html/404.html.j2
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/html/404.html.j2
     dest: /usr/local/openresty/nginx/html/404.html
     owner: root
     group: root
@@ -34,7 +34,7 @@
 
 - name: /usr/local/openresty/nginx/html/50x.html
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/html/50x.html.j2
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/html/50x.html.j2
     dest: /usr/local/openresty/nginx/html/50x.html
     owner: root
     group: root
@@ -42,7 +42,7 @@
 
 - name: /usr/local/openresty/nginx/conf/nginx.conf
   template:
-    src: roles/1-node-tsuru-docker/templates/openresty/nginx/conf/nginx.conf.j2
+    src: roles/1-node-tsuru-autossl/templates/openresty/nginx/conf/nginx.conf.j2
     dest: /usr/local/openresty/nginx/conf/nginx.conf
     owner: root
     group: root

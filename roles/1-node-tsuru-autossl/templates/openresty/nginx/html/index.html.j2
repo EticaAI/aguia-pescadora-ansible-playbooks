@@ -13,6 +13,12 @@
 </head>
 <body>
 <h1>{{ inventory_hostname }}</h1>
+<ul>
+    <li>Apps: <strong>https://MyApp.{{ apps_domain }}</strong></li>
+    <li>Tsuru target: <a href="https://{{ tsuru_target }}">https://{{ tsuru_target }}</a></li>
+    <li>Tsuru dashboard: <a href="https://{{ tsuru_dashboard }}">https://{{ tsuru_dashboard }}</a></li>
+</ul>
+<!--
 <p>If you see this page, the OpenResty web platform is successfully installed and
 working. Further configuration is required.</p>
 
@@ -20,8 +26,11 @@ working. Further configuration is required.</p>
 <a href="https://openresty.org/">openresty.org</a>.<br/>
 Commercial support is available at
 <a href="https://openresty.com/">openresty.com</a>.</p>
-
 <p><em>Thank you for flying OpenResty.</em></p>
 <p>{{ inventory_hostname }}</p>
+<p>{{ tsuru_target }}</p>
+<p>{{ tsuru_target }}</p>
+<p>{{ apps_domain }}</p>
+-->
 </body>
 </html>

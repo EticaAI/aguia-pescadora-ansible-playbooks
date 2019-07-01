@@ -25,11 +25,11 @@
 - name: Tsuru PaaS + OpenResty, 1 Nó "Tudo Em Um", Docker puro (sem Kubernetes)
   hosts: all
   remote_user: root
+  vars:
+    paas_host: "{{ inventory_hostname }}"
+    # tsuru_target: "tsuru.{{paas_host}}
+    # apps_domain: "app.{{paas_host}}"
 
   roles:
     - common
-    - 1-node-tsuru-docker
-#    - mysql
-#    - nginx
-#    - php-fpm
-#    - wordpress
+    - 1-node-tsuru-autossl

@@ -20,9 +20,16 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 # TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
 # @see https://github.com/EticaAI/aguia-pescadora/issues/27
 git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
-ansible-playbook tldr.yml -e tsuru_host=tsuru.example.com
-# http://tsuru.example.com:8080
+ansible-playbook tldr.yml -e paas_host=example.com
 ```
+**Resultado ao final do TL;DR:**
+- Tsuru URLs:
+  - https://tsuru.example.com
+  - https://tsuru-dashboard.example.com
+- Apps
+  - https://meu-app-1.app.example.com
+  - https://my-app2.app.example.com
+  - https://mi-aplicación-tre.app.example.com
 
 ---
 
@@ -31,7 +38,7 @@ ansible-playbook tldr.yml -e tsuru_host=tsuru.example.com
 - [Ansible Playbooks da Águia Pescadora da Etica.AI](#ansible-playbooks-da-águia-pescadora-da-eticaai)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [Executar os Playbooks](#executar-os-playbooks)
-            - [1-node-tsuru-docker](#1-node-tsuru-docker)
+            - [1-node-tsuru-autossl](#1-node-tsuru-autossl)
             - [etica.dev](#eticadev)
         - [Requisitos](#requisitos)
             - [Seu computador local](#seu-computador-local)
@@ -65,18 +72,19 @@ está convertendo scripts e estratégias para o novo padrão. Pode levar um temp
 até implementação desse nível de automação, porém pode ajudar em especial
 reuso por colegas. Grato pela compreensão :).
 
-#### 1-node-tsuru-docker
+#### 1-node-tsuru-autossl
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
 Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
 
-_TODO: renomear role `1-node-tsuru-docker` para `1-node-tsuru-docker-resty-auto-ssl`  (fititnt, 2019-07-01 06:06 BRT)_
-
 ```bash
-ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
+ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node-tsuru-autossl.yml
 ```
 
 #### etica.dev
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
+
+Neste modelo etica.dev provavelmente estará usando Tsuru em Kubernetes em vez
+de apenas docker.
 
 ```bash
 ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml

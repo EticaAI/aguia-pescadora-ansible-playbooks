@@ -1,0 +1,8 @@
+---
+# defaults file for 1-node-tsuru-autossl
+
+# @see https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+paas_host: "example.com"
+tsuru_target: "tsuru.{{paas_host}}"
+tsuru_dashboard: "tsuru-dashboard.{{paas_host}}"
+apps_domain: "app.{{paas_host}}"
