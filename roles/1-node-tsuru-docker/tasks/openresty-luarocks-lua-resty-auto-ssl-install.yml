@@ -1,6 +1,62 @@
 ---
 # openresty-luarocks-lua-resty-auto-ssl-install.yml
 
-- name: software-properties-common é requerido pelo PPA de OpenResty
+
+## Checagens de softwares que precisam ser instalados __________________________
+- name: "openresty? luarocks? lua-resty-auto-ssl?"
+  shell: openresty -v
+  register: is_openresty
+  ignore_errors: true
+
+- name: "luarocks?"
+  shell: luarocks --version
+  register: is_luarocks
+  ignore_errors: true
+
+- name: "lua-resty-auto-ssl?"
+  stat:
+    path: /etc/resty-auto-ssl
+  register: is_restyautossl
+
+## Instalação de softwares que ainda não foram instalados, mas precisam ________
+
+### openresty
+- name: "software-properties-common: apt install -y software-properties-common"
   apt:
     name: software-properties-common
+  when: is_openresty is failed
+
+- name: "openresty: apt-key add"
+  apt_key: 
+    url: https://openresty.org/package/pubkey.gpg 
+    state: present
+  when: is_openresty is failed
+
+- name: "openresty: add-apt-repository (...)"
+  apt_repository: 
+    repo: 'deb http://openresty.org/package/ubuntu bionic main' 
+    state: present
+    filename: openresty
+    update_cache: yes
+  when: is_openresty is failed
+
+- name: "openresty: apt install -y openresty"
+  apt:
+    name: openresty
+    state: present
+    update_cache: yes
+  when: is_openresty is failed
+
+### luarocks
+- name: "luarocks: apt install -y luarocks"
+  apt:
+    name: luarocks
+    state: present
+    update_cache: yes
+  when: is_luarocks is failed
+
+#### resty-auto-ssl
+- name: "resty-auto-ssl: sudo luarocks install lua-resty-auto-ssl"
+  shell: luarocks install lua-resty-auto-ssl
+  register: is_restyautossl2
+  when: is_restyautossl is failed

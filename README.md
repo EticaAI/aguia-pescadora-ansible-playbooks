@@ -21,6 +21,7 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 # @see https://github.com/EticaAI/aguia-pescadora/issues/27
 git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
 ansible-playbook tldr.yml -e tsuru_host=tsuru.example.com
+# http://tsuru.example.com:8080
 ```
 
 ---
@@ -67,6 +68,8 @@ reuso por colegas. Grato pela compreensão :).
 #### 1-node-tsuru-docker
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
 Tsuru PaaS usando docker (sem Kubernetes) com auto-SSL feita por OpenResty + Lua-Resty-autossl
+
+_TODO: renomear role `1-node-tsuru-docker` para `1-node-tsuru-docker-resty-auto-ssl`  (fititnt, 2019-07-01 06:06 BRT)_
 
 ```bash
 ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node.yml
