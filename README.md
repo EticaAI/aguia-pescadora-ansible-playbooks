@@ -83,7 +83,7 @@ reuso por colegas. Grato pela compreensão :).
 Esta opção não usa Kubernetes ou k3s.
 
 ```bash
-ansible-playbook -i inventory/1-node-testserver/inventory.ini  1-node-tsuru-autossl.yml
+ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
 ```
 
 #### etica.dev

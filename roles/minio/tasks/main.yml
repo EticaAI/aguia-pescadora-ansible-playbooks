@@ -69,10 +69,11 @@
   notify:
     - restart minio
 
-# curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio
+# Keys estão aqui (num arquivo json)
+# root@aguia-pescadora-foxtrot:~# cat /usr/local/share/minio/.minio.sys/config/config.json 
 
-# sudo chmod +x minio
+## @todo ler mais sobre Multiplos usuarios por minio (fititnt, 2019-06-01 18:26 BRT)
+# https://docs.min.io/docs/minio-multi-user-quickstart-guide.html
 
-# sudo mv minio /usr/local/bin
-
-# sudo mv minio.service /etc/systemd/system
+## @todo ler mais sobre problemas de segurança padrão enterprise (fititnt, 2019-06-01 18:26 BRT)
+# @see https://blog.minio.io/c-e-compression-encryption-cb6b7f04a369
