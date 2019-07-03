@@ -5,6 +5,8 @@
 - name: Instalação de OpenResty, Lua Rest & Lua Resty AutoSSL (faz o HTTPS para os Apps)
   include: openresty-luarocks-lua-resty-auto-ssl-install.yml
 
+# TODO: a instação do Minio deve ser opcional (fititnt, 2019-07-03 09:55 BRT)
+
 # Movido para role dedicado
 #- name: Instalação do Minio
 #  include: minio-install.yml
@@ -14,4 +16,7 @@
 
 - name: Requerimentos do Tsuru caso seja instalado diretamente na VPS
   include: tsuru-requeriments-if-direct-on-vps.yml
+
+- name: Requerimentos do Tsuru caso seja instalado diretamente na VPS
+  include: tsuru-install.yml
 
