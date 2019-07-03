@@ -1,0 +1,121 @@
+#jinja2:variable_start_string:'{##', variable_end_string:'##}'
+
+# FROM: https://github.com/EticaAI/aguia-pescadora/blob/master/diario-de-bordo/tsuru-inicializacao%2B%2B/install-compose.yml
+########### diario-de-bordo/tsuru-inicializacao++/install-compose.yml ###########
+# Arquivo install-compose.yml que criou inicialmente o Tsuru Cluster Águia Pescadora
+#
+# DESCRIPTION: Para entender mais sobre este arquivo, por favor leia também o arquivo
+#              seu-computador.sh que está neste mesmo diretório.
+#
+#
+# CHANGELOG: - [2019-09-22 19:54 BRT] arquivo gerado usand comando
+#              `tsuru install-config-init` com Tsuru Client versão 1.7.0-rc1.
+#            - [2019-09-22 20:07 BRT] editado para usar porta 82 em vez de 80:
+#              services:planb:ports de "-80:8080" para "- 82:8080";
+#              A porta 80 será usada por algum software que realize o TLS
+#              (HTTPS) antes de enregar para o PlanB.
+#                - Talvez seja colocado um Varnish na 81, por isso foi pulada,
+#                  porem a urgencia agora é ter uma HTTPS
+#
+# CREATED AT: 2019-09-22
+# UPDATED AT:
+#
+# -----------------------------------------------------------------------------#
+# LICENSE: Public Domain
+#   Except where otherwise noted, content on this server configuration and to
+#   the extent possible under law, Emerson Rocha has waived all copyright and
+#   related or neighboring rights to this work to Public Domain
+#
+# MAINTAINER: Emerson Rocha <rocha(at)ieee.org>
+#   Keep in mind that several people help with suggestions, testing, bugfixes
+#   and inspiration without get names noted in places that most software
+#   developers look. I'm saying this in special for people who help over
+#   Facebook discussions. Even the ones without a personal computer yet and/or
+#   with limited access to internet.
+#
+# SECURITY:
+#   Reporting a Vulnerability:
+#   Send e-mail to Emerson Rocha: rocha(at)ieee.org.
+################################################################################
+
+version: "3"
+
+services:
+  redis:
+    image: redis:latest
+    networks:
+      - tsuru
+    volumes:
+      - redis-data:/data
+
+  mongo:
+    image: mongo:latest
+    networks:
+      - tsuru
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+
+  planb:
+    image: tsuru/planb:latest
+    command: --listen :8080 --read-redis-host redis --write-redis-host redis --access-log stdout
+    ports:
+      # - 80:8080 # Valor original padrão
+      - 82:8080
+    networks:
+      - tsuru
+    depends_on:
+      - redis
+
+  registry:
+    image: registry:2
+    environment:
+      - "REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/var/lib/registry"
+      - "REGISTRY_HTTP_TLS_CERTIFICATE=/certs/{{CLUSTER_PRIVATE_ADDR}}:5000/registry-cert.pem"
+      - "REGISTRY_HTTP_TLS_KEY=/certs/{{CLUSTER_PRIVATE_ADDR}}:5000/registry-key.pem"
+    volumes:
+      - "/etc/docker/certs.d:/certs:ro"
+      - registry-data:/var/lib/registry
+    ports:
+      - 5000:5000
+    networks:
+      - tsuru
+
+  tsuru:
+    image: "{{TSURU_API_IMAGE}}"
+    volumes:
+      - "/etc/docker/certs.d:/certs:ro"
+      - "/etc/tsuru/tsuru.conf:/etc/tsuru/tsuru.conf:ro"
+    ports:
+      - 8080:8080
+    networks:
+      - tsuru
+    depends_on:
+      - redis
+      - mongo
+      - registry
+      - planb
+    environment:
+      - MONGODB_ADDR=mongo
+      - MONGODB_PORT=27017
+      - REDIS_ADDR=redis
+      - REDIS_PORT=6379
+      - HIPACHE_DOMAIN={{CLUSTER_ADDR}}.nip.io
+      - REGISTRY_ADDR={{CLUSTER_PRIVATE_ADDR}}
+      - REGISTRY_PORT=5000
+      - TSURU_ADDR=http://{{CLUSTER_ADDR}}
+      - TSURU_PORT=8080
+
+networks:
+  tsuru:
+    driver: overlay
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.9.0/24
+
+volumes:
+  mongo-data:
+  mongo-config:
+  redis-data:
+  registry-data:

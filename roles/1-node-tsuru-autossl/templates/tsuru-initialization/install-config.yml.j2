@@ -1,17 +1,19 @@
-name: 'aguia-pescadora'
+#jinja2:variable_start_string:'{##', variable_end_string:'##}'
+
+name: '{## inventory_hostname ##}'
 hosts:
     core:
         size: 1
         driver:
             options:
-                generic-ip-address: ["192.99.69.2"]
+                generic-ip-address: ["{## ansible_facts['default_ipv4']['address'] ##}"]
                 generic-ssh-key: ["/home/fititnt/.ssh/id_rsa-aguia-pescadora-tsuru"]
     apps:
         size: 1
         dedicated: false
         driver:
             options:
-                generic-ip-address: ["192.99.69.2"]
+                generic-ip-address: ["{## ansible_facts['default_ipv4']['address'] ##}"]
                 generic-ssh-key: ["/home/fititnt/.ssh/id_rsa-aguia-pescadora-tsuru"]
 driver:
     name: generic

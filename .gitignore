@@ -1,2 +1,6 @@
 temp/
 extra-scripts/
+
+tsuru-initialization-configs/*
+
+!tsuru-initialization-configs/README.md
