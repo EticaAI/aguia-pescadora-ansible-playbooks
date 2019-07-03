@@ -7,17 +7,18 @@
 # ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
 # ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=aguia-pescadora-foxtrot.etica.ai
 
-- name: 'debug'
-  hosts: all
-  tasks:
-  - name: debug tsuru_init_configs
-    debug:
-      msg: Debug ansible_host {{ ansible_facts['default_ipv4']['address'] }}
+#- name: 'debug'
+#  hosts: all
+#  tasks:
+#  - name: debug tsuru_init_configs
+#    debug:
+#      msg: Debug ansible_host {{ ansible_facts['default_ipv4']['address'] }}
 
 - name: "localhost: tsuru client? docker? docker-machine?"
   hosts: localhost
   roles:
     - can-localhost-setup-remote-tsuru
+    # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: yes }
 
 - name: "Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty)"
   hosts: all
@@ -30,4 +31,4 @@
   roles:
     - common
     - minio
-    - 1-node-tsuru-autossl
+    # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: no }

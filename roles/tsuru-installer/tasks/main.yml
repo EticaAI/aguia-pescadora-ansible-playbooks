@@ -1,7 +1,5 @@
 ---
 
-
-
 - name: tsuru client? https://tsuru-client.readthedocs.io/en/latest/installing.html
   shell: tsuru --version
   register: result
