@@ -1,23 +1,31 @@
 ---
 # tasks file for common
 
-- fail:
-    msg: Ubuntu? Debian? Fail. Not fully tested on other OSs.
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+#- name: debug ansible_hostname
+#  debug:
+#    msg: debug {{ ansible_facts['date_time']['tz'] }}
+
+## Por segurança talvez a pessoa pode não ter lido manual e não saber que não 
+## testamos nos demais sistemas operacionais.
+- name: Ubuntu? Debian?
+  fail:
+    msg: fail
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
 
 - name: sudo apt-get install aptitude
   apt:
    name: aptitude
    state: present
-  # when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: sudo hostnamectl set-hostname {{ inventory_hostname }}
   hostname:
     name: "{{ inventory_hostname }}"
+  when: inventory_hostname_short != ansible_hostname
 
 - name: sudo timedatectl set-timezone UTC
   timezone:
     name: UTC
+  when: ansible_facts['date_time']['tz'] != 'UTC'
 
 # sudo timedatectl set-timezone UTC
 

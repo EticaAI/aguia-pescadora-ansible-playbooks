@@ -1,0 +1,21 @@
+---
+
+
+
+- name: tsuru client? https://tsuru-client.readthedocs.io/en/latest/installing.html
+  shell: tsuru --version
+  register: result
+  changed_when: false
+  ignore_errors: false
+
+- name: docker? https://docs.docker.com/install/
+  shell: docker --version
+  register: result2
+  changed_when: false
+  ignore_errors: false
+
+- name: docker-machine? https://docs.docker.com/machine/install-machine/
+  shell: docker-machine version
+  register: result3
+  changed_when: false
+  ignore_errors: false
