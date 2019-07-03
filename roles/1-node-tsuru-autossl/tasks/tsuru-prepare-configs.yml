@@ -5,27 +5,45 @@
 #       Como não tenho certeza vou copiar o arquivo do servidor remoto de volta
 #       para o computador local (fititnt, 2019-07-03 10:23 BRT)
 
-- name: Tsuru, pasta temporaria para install-compose.yml e install-config.yml
-  tempfile:
-    state: directory
-    suffix: tsuru_init_configs
-  register: tsuru_init_configs
+#- name: Tsuru, pasta temporaria para install-compose.yml e install-config.yml
+#  tempfile:
+#    state: directory
+#    suffix: tsuru_init_configs
+#  register: tsuru_init_configs
 
-- name: install-compose.yml (tsuru-init)
+- name: "tsuru-init: install-compose.yml 1"
   template:
     src: roles/1-node-tsuru-autossl/templates/tsuru-initialization/install-compose.yml.j2
-    dest: /root/temp-tsuru-init
+    dest: /root/install-compose.yml
     owner: root
     group: root
     mode: '0600'
 
-- name: install-config.yml.j2(tsuru-init)
+- name: "tsuru-init: install-compose.yml 2"
+  fetch:
+    src: /root/install-compose.yml
+    dest: "{{ playbook_dir }}/tsuru-initialization-configs/install-compose.yml"
+
+- name: "tsuru-init: install-config.yml 1"
   template:
     src: roles/1-node-tsuru-autossl/templates/tsuru-initialization/install-config.yml.j2
-    dest: /root/temp-tsuru-init
+    dest: /root/install-config.yml
     owner: root
     group: root
     mode: '0600'
+
+- name: "tsuru-init: install-config.yml 2"
+  fetch:
+    src: /root/install-config.yml
+    dest: "{{ playbook_dir }}/tsuru-initialization-configs/install-config.yml"
+
+#- name: install-config.yml.j2(tsuru-init)
+#  template:
+#    src: roles/1-node-tsuru-autossl/templates/tsuru-initialization/install-config.yml.j2
+#    dest: /root/temp-tsuru-init/
+#    owner: root
+#    group: root
+#    mode: '0600'
 
 #- name: Remove a pasta temporaria criada para instalar o tsuru remotamente
 #  file:
@@ -35,4 +53,4 @@
 
 - name: debug tsuru_init_configs
   debug:
-    msg: Debug {{ tsuru_init_configs }}
+    msg: Debug {{ playbook_dir }}

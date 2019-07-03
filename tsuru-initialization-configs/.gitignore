@@ -1,0 +1,5 @@
+# @see https://docs.tsuru.io/stable/installing/using-tsuru-installer.html
+install-compose.yml
+install-config.yml
+install-compose.yml.bkp
+install-config.yml.bkp
