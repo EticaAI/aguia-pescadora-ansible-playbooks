@@ -9,11 +9,13 @@
 - name: "openresty?"
   shell: openresty -v
   register: is_openresty
+  changed_when: false
   ignore_errors: true
 
 - name: "luarocks?"
   shell: luarocks --version
   register: is_luarocks
+  changed_when: false
   ignore_errors: true
 
 - name: "lua-resty-auto-ssl?"

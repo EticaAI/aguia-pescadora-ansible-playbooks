@@ -1,0 +1,38 @@
+---
+
+
+# NOTE: Tem como usar ansible template e o destino do arquivo ser uma pasta local?
+#       Como não tenho certeza vou copiar o arquivo do servidor remoto de volta
+#       para o computador local (fititnt, 2019-07-03 10:23 BRT)
+
+- name: Tsuru, pasta temporaria para install-compose.yml e install-config.yml
+  tempfile:
+    state: directory
+    suffix: tsuru_init_configs
+  register: tsuru_init_configs
+
+- name: install-compose.yml (tsuru-init)
+  template:
+    src: roles/1-node-tsuru-autossl/templates/tsuru-initialization/install-compose.yml.j2
+    dest: /root/temp-tsuru-init
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: install-config.yml.j2(tsuru-init)
+  template:
+    src: roles/1-node-tsuru-autossl/templates/tsuru-initialization/install-config.yml.j2
+    dest: /root/temp-tsuru-init
+    owner: root
+    group: root
+    mode: '0600'
+
+#- name: Remove a pasta temporaria criada para instalar o tsuru remotamente
+#  file:
+#    path: "{{ tsuru-init-configs.path }}"
+#    state: absent
+#  when: tsuru-init-configs.path is defined
+
+- name: debug tsuru_init_configs
+  debug:
+    msg: Debug {{ tsuru_init_configs }}

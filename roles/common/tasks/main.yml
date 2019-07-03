@@ -1,9 +1,23 @@
 ---
 # tasks file for common
 
-- name: Set Hostname
+- fail:
+    msg: Ubuntu? Debian? Fail. Not fully tested on other OSs.
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: sudo apt-get install aptitude
+  apt:
+   name: aptitude
+   state: present
+  # when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: sudo hostnamectl set-hostname {{ inventory_hostname }}
   hostname:
     name: "{{ inventory_hostname }}"
+
+- name: sudo timedatectl set-timezone UTC
+  timezone:
+    name: UTC
 
 # sudo timedatectl set-timezone UTC
 

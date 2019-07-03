@@ -17,6 +17,8 @@
 - name: Requerimentos do Tsuru caso seja instalado diretamente na VPS
   include: tsuru-requeriments-if-direct-on-vps.yml
 
-- name: Requerimentos do Tsuru caso seja instalado diretamente na VPS
-  include: tsuru-install.yml
+- name: Prepara arquivos que serão usados pelo Tsuru para instalar na VPS remota (install-compose.yml e install-config.yml)
+  include: tsuru-prepare-configs.yml
 
+- name: Instalação do Tsuru
+  include: tsuru-install.yml
