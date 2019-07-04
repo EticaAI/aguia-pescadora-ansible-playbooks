@@ -62,6 +62,7 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
         - [Roles](#roles)
             - [paas-host](#paas-host)
             - [tsuru-installer](#tsuru-installer)
+                - [Acompanhar resultado to tsuru install-create](#acompanhar-resultado-to-tsuru-install-create)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
             - [Documentação Ansible-BR](#documentação-ansible-br)
@@ -183,6 +184,19 @@ As principais diferenças entre a documentação padrão do Tsuru são:
 1. Gera arquivos de configuração
 
 -->
+
+##### Acompanhar resultado to tsuru install-create
+
+Não é trivial exibir na mesma tela de acompanhamento do Ansible o resultado de
+um comando shell em tempo real, porém é salvo um arquivo de log na mesma pasta
+em que os arquivos install-config.yml e install-compose.yml estão.
+
+```bash
+tail -f tsuru-initialization-configs/tsuru-install.log
+```
+
+Note que o arquivo acima inclusive a senha do administrador inicial.
+Mais informações em breve.
 
 ## Referências sobre a pilha de soluções da Águia Pescadora
 

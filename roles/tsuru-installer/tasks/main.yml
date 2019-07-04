@@ -1,5 +1,13 @@
 ---
 
+#- name: debug tsuru_init_configs
+#  debug:
+#    msg: Debug  paas_cluster_name {{ paas_cluster_name }}
+
+#- name: debug tsuru_private_key
+#  debug:
+#    msg: Debug  tsuru_private_key {{ tsuru_private_key }}
+
 - name: tsuru client? https://tsuru-client.readthedocs.io/en/latest/installing.html
   shell: tsuru --version
   register: result

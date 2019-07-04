@@ -12,10 +12,20 @@
 #  tasks:
 #  - name: debug tsuru_init_configs
 #    debug:
-#      msg: Debug ansible_host {{ ansible_facts['default_ipv4']['address'] }}
+#      msg: Debug {{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }} // ansible_host {{ ansible_facts['all_ipv4_addresses'][0] }} paas_cluster_name {{ paas_cluster_name }}
+#      #msg: Debug {{ hostvars[groups['all'][0]]['default_ipv4']['address'] }} // ansible_host {{ ansible_facts['all_ipv4_addresses'][0] }} paas_cluster_name {{ paas_cluster_name }}
+
+# TODO: mover o role de tsuru-install para o final deste arquivo (fititnt, 2019-07-03 22:21 BRT)
 
 - name: "localhost: tsuru client? docker? docker-machine?"
   hosts: localhost
+  vars:
+    paas_master_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
+    paas_node1_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
+#  tasks:
+#  - name: 'debug'
+#    debug:
+#      msg: debug {{ hostvars[groups['all'][0]] }}
   roles:
     - tsuru-installer
     # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: yes }

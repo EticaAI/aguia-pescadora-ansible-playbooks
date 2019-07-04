@@ -30,7 +30,7 @@
 - name: "tsuru-init: install-config.yml 1"
   template:
     src: "{{role_path}}/templates/1-node/install-config.yml.j2"
-    dest: "{{ playbook_dir }}/tsuru-initialization-configs//install-config.yml"
+    dest: "{{ playbook_dir }}/tsuru-initialization-configs/install-config.yml"
     #owner: root
     #group: root
     #mode: '0600'

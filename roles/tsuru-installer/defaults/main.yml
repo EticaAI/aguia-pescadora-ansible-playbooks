@@ -1,2 +1,7 @@
 ---
 # defaults file for tsuru-installer
+
+tsuru_private_key: "{{ ansible_ssh_private_key_file }}"
+tsuru_cluster_name: "{{ paas_cluster_name }}"
+tsuru_master_ip: "{{ paas_master_ip }}"
+tsuru_node1_ip: "{{ paas_node1_ip }}"

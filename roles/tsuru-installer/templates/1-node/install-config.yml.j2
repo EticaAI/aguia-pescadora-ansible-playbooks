@@ -1,20 +1,20 @@
 #jinja2:variable_start_string:'{##', variable_end_string:'##}'
 
-name: '{## inventory_hostname ##}'
+name: '{## tsuru_cluster_name ##}'
 hosts:
     core:
         size: 1
         driver:
             options:
-                generic-ip-address: ["{## ansible_facts['default_ipv4']['address'] ##}"]
-                generic-ssh-key: ["/home/fititnt/.ssh/id_rsa-aguia-pescadora-tsuru"]
+                generic-ip-address: ["{## tsuru_master_ip ##}"]
+                generic-ssh-key: ["{## tsuru_private_key ##}"]
     apps:
         size: 1
         dedicated: false
         driver:
             options:
-                generic-ip-address: ["{## ansible_facts['default_ipv4']['address'] ##}"]
-                generic-ssh-key: ["/home/fititnt/.ssh/id_rsa-aguia-pescadora-tsuru"]
+                generic-ip-address: ["{## tsuru_node1_ip ##}"]
+                generic-ssh-key: ["{## tsuru_private_key ##}"]
 driver:
     name: generic
     options:

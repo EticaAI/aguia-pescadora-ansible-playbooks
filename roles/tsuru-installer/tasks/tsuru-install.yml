@@ -3,3 +3,8 @@
 # TODO: fazer primeiro teste de tsuru init (fititnt, 2019-07-03 09:54 BRT)
 
 # TODO: armazenar um log de texto com resultado do shell do Tsuru (fititnt, 2019-07-03 13:56 BRT)
+
+- name: cd tsuru-initialization-configs; tsuru install-create -c install-config.yml -e install-compose.yml
+  shell: "tsuru install-create -c install-config.yml -e install-compose.yml >> {{ playbook_dir }}/tsuru-initialization-configs/tsuru-install.log"
+  args:
+    chdir: "{{ playbook_dir }}/tsuru-initialization-configs/"
