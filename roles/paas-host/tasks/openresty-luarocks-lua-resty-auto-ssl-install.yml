@@ -21,7 +21,7 @@
 - name: "lua-resty-auto-ssl?"
   stat:
     path: /etc/resty-auto-ssl
-  register: is_restyautossl
+  register: restyautossl_folder
 
 ## apt install -y openresty ____________________________________________________
 
@@ -65,7 +65,7 @@
 - name: "resty-auto-ssl: sudo luarocks install lua-resty-auto-ssl"
   shell: luarocks install lua-resty-auto-ssl
   register: is_restyautossl2
-  when: is_restyautossl is failed
+  when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
 
 - name: 'sudo mkdir /etc/resty-auto-ssl ; sudo chown www-data /etc/resty-auto-ssl'
   file:
@@ -73,17 +73,19 @@
     path: /etc/resty-auto-ssl
     owner: www-data
     group: www-data
-  when: is_restyautossl is failed
+  when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
 
 # TODO: trocar comando seguinte de 'shell' para 'lineinfile' ou 'template' fititnt, 2019-07-01 06:33 BRT)
 # @see https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html
 - name: "hotfix 'err: Can't load ./.rnd into RNG', https://github.com/openssl/openssl/issues/7754#issuecomment-444063355"
   shell: sed -i '/RANDFILE/s/^/#/g' /etc/ssl/openssl.cnf
   register: is_restyautossl_hotfix_openssl
-  when: is_restyautossl is failed
+  when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
 
 - name: "sudo openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj '/CN=sni-support-required-for-valid-ssl' -keyout /etc/ssl/resty-auto-ssl-fallback.key -out /etc/ssl/resty-auto-ssl-fallback.crt"
   shell: openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj '/CN=sni-support-required-for-valid-ssl' -keyout /etc/ssl/resty-auto-ssl-fallback.key -out /etc/ssl/resty-auto-ssl-fallback.crt
   become: yes
   register: is_restyautossl_fallbackkey
-  when: is_restyautossl is failed
+  when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
+
+# TODO: resolver problema de fallbackkey não estar sendo criada automaticamente (fititnt, 2019-07-03 23:34 BRT)

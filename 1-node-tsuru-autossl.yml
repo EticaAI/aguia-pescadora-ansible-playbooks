@@ -15,21 +15,6 @@
 #      msg: Debug {{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }} // ansible_host {{ ansible_facts['all_ipv4_addresses'][0] }} paas_cluster_name {{ paas_cluster_name }}
 #      #msg: Debug {{ hostvars[groups['all'][0]]['default_ipv4']['address'] }} // ansible_host {{ ansible_facts['all_ipv4_addresses'][0] }} paas_cluster_name {{ paas_cluster_name }}
 
-# TODO: mover o role de tsuru-install para o final deste arquivo (fititnt, 2019-07-03 22:21 BRT)
-
-- name: "localhost: tsuru client? docker? docker-machine?"
-  hosts: localhost
-  vars:
-    paas_master_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
-    paas_node1_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
-#  tasks:
-#  - name: 'debug'
-#    debug:
-#      msg: debug {{ hostvars[groups['all'][0]] }}
-  roles:
-    - tsuru-installer
-    # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: yes }
-
 - name: "Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty)"
   hosts: all
   remote_user: root
@@ -41,4 +26,17 @@
   roles:
     - common
     - minio
+    - paas-host
     # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: no }
+
+- name: "localhost: tsuru client? docker? docker-machine?"
+  hosts: localhost
+  vars:
+    paas_master_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
+    paas_node1_ip: "{{ hostvars[groups['all'][0]]['ansible_facts']['default_ipv4']['address'] }}"
+  roles:
+    - tsuru-installer
+
+# TODO: fazer checagem para apenas instalar o Tsuru se, e somente se, já não estiver instalado (fititnt, 2019-07-03 23:04 BRT)
+
+# TODO: resolver problema do Tsuru não sendo reiniciado com reboot (fititnt, 2019-07-03 23:06)

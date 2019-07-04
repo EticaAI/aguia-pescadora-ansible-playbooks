@@ -2,4 +2,4 @@
 # handlers file for minio
 
 - name: restart minio
-  service: name=minio state=restart
+  service: name=minio state=restarted
