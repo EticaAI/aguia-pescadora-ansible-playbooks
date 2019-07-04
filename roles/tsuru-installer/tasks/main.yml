@@ -17,3 +17,9 @@
   register: result3
   changed_when: false
   ignore_errors: false
+
+- name: Prepara arquivos que serão usados pelo Tsuru para instalar na VPS remota (install-compose.yml e install-config.yml)
+  include: tsuru-prepare-configs.yml
+
+- name: Instalação do Tsuru
+  include: tsuru-install.yml

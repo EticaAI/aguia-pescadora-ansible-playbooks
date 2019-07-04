@@ -17,7 +17,7 @@
 - name: "localhost: tsuru client? docker? docker-machine?"
   hosts: localhost
   roles:
-    - can-localhost-setup-remote-tsuru
+    - tsuru-installer
     # - { role: 1-node-tsuru-autossl, tsuru_initialization_only: yes }
 
 - name: "Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty)"

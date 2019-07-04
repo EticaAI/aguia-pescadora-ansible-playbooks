@@ -25,6 +25,15 @@ git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
 ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
 ```
 
+<!--
+Exemplo com 3 nós:
+ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
+
+Exemplo que estou testando:
+ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
+
+-->
+
 > - Tsuru URLs:
 >   - https://tsuru.example.com
 >   - https://tsuru-dashboard.example.com
@@ -49,7 +58,10 @@ ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
             - [Seu computador local](#seu-computador-local)
                 - [Instalação do Ansible](#instalação-do-ansible)
             - [Servidores remotos](#servidores-remotos)
-- [Veja também](#veja-também)
+    - [Sobre este Ansible Playbook](#sobre-este-ansible-playbook)
+        - [Roles](#roles)
+            - [paas-host](#paas-host)
+            - [tsuru-installer](#tsuru-installer)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
             - [Documentação Ansible-BR](#documentação-ansible-br)
@@ -131,7 +143,46 @@ servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
     - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
 
-# Veja também
+## Sobre este Ansible Playbook
+
+### Roles
+
+<!--
+ #### common
+
+- [common](roles/common/README.md)
+-->
+
+#### paas-host
+
+- [paas-host](roles/paas-host/README.md)
+
+`paas-host` é a função responsável por preparar a(s) VPSs para fazer
+terminação TLS (isto é, servir o primeiro acesso HTTPS) que chegam no servidor.
+Usa o [OpenResty](https://github.com/openresty/openresty) +
+[GUI/lua-resty-auto-ssl](https://github.com/GUI/lua-resty-auto-ssl).
+
+#### tsuru-installer
+
+- [tsuru-installer](roles/tsuru-installer/README.md)
+
+Oferece uma versão mais limitada do que o fantástico
+[Tsuru Installer](https://docs.tsuru.io/stable/installing/using-tsuru-installer.html)
+automatizaria por você.
+
+A função dele é criar na pasta [tsuru-initialization-configs](tsuru-initialization-configs/)
+os arquivos de configuração que são parâmetros usados na chamada
+`tsuru install-create -c install-config.yml -e install-compose.yml`. Caso você
+não tenha o [Docker](https://docs.docker.com/install/),
+[Docker Machine](https://docs.docker.com/machine/install-machine/) e o
+[Tsuru Client](https://tsuru-client.readthedocs.io/en/latest/installing.html)
+irá alertar.
+
+<!--
+As principais diferenças entre a documentação padrão do Tsuru são:
+1. Gera arquivos de configuração
+
+-->
 
 ## Referências sobre a pilha de soluções da Águia Pescadora
 
