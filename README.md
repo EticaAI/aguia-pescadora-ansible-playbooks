@@ -1,4 +1,4 @@
-# Ansible Playbooks da Águia Pescadora da Etica.AI
+# Ansible Playbooks da Águia Pescadora
 
 **![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Infraestrutura como Código da
 [Águia Pescadora](https://https://aguia-pescadora.etica.ai/) com Playbooks de Ansible. Veja também
@@ -49,7 +49,7 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
 
 <!-- TOC depthFrom:1 -->
 
-- [Ansible Playbooks da Águia Pescadora da Etica.AI](#ansible-playbooks-da-águia-pescadora-da-eticaai)
+- [Ansible Playbooks da Águia Pescadora](#ansible-playbooks-da-águia-pescadora)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [Executar os Playbooks](#executar-os-playbooks)
             - [1-node](#1-node)
@@ -84,6 +84,8 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
 -->
 
 ## Como usar o aguia-pescadora-ansible-playbooks
+
+Documentação mais específica em [aguia-pescadora.md](aguia-pescadora.md)
 
 ### Executar os Playbooks
 A pessoa mantenedora, Emerson Rocha, recentemente começou a usar Ansible e ainda
