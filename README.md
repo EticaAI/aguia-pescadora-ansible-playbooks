@@ -54,7 +54,6 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
         - [Executar os Playbooks](#executar-os-playbooks)
             - [1-node](#1-node)
             - [1-node-tsuru-autossl](#1-node-tsuru-autossl)
-            - [etica.dev](#eticadev)
         - [Requisitos](#requisitos)
             - [Seu computador local](#seu-computador-local)
                 - [Instalação do Ansible](#instalação-do-ansible)
@@ -109,19 +108,6 @@ Esta opção não usa Kubernetes ou k3s.
 ```bash
 ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
 ```
-
-<!--
-
-#### etica.dev
-![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
-
-Neste modelo etica.dev provavelmente estará usando Tsuru em Kubernetes em vez
-de apenas docker.
-
-```bash
-ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
-```
--->
 
 ### Requisitos
 
