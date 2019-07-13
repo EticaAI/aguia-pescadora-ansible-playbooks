@@ -52,6 +52,7 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
 - [Ansible Playbooks da Águia Pescadora da Etica.AI](#ansible-playbooks-da-águia-pescadora-da-eticaai)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [Executar os Playbooks](#executar-os-playbooks)
+            - [1-node](#1-node)
             - [1-node-tsuru-autossl](#1-node-tsuru-autossl)
             - [etica.dev](#eticadev)
         - [Requisitos](#requisitos)
@@ -90,6 +91,14 @@ está convertendo scripts e estratégias para o novo padrão. Pode levar um temp
 até implementação desse nível de automação, porém pode ajudar em especial
 reuso por colegas. Grato pela compreensão :).
 
+#### 1-node
+![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
+Águia Pescadora PaaS Tudo-Em-Um-Nó.
+
+```bash
+ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node.yml
+```
+
 #### 1-node-tsuru-autossl
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
 Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty).
@@ -98,6 +107,8 @@ Esta opção não usa Kubernetes ou k3s.
 ```bash
 ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
 ```
+
+<!--
 
 #### etica.dev
 ![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Este é o playbook usado em produção no etica.dev.
@@ -108,6 +119,7 @@ de apenas docker.
 ```bash
 ansible-playbook -i inventory/etica.dev/inventory.ini playbook.yml
 ```
+-->
 
 ### Requisitos
 
