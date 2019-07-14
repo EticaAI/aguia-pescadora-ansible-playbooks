@@ -1,2 +1,5 @@
 ---
-# tasks file for k8s
+# tasks file for ap-kubernetes
+
+- name: microk8s
+  include: microk8s.yml

@@ -17,5 +17,6 @@
 
   roles:
     - common
+    - ap-kubernetes
     # - minio
     # - paas-host

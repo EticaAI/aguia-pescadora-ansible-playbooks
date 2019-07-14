@@ -35,6 +35,10 @@ https://www.wikiaves.com.br/wiki/macarico-solitario
 ansible-playbook -i inventory/macarico-solitario macarico-solitario.yml
 ```
 
+<!--
+ansible-lint macarico-solitario.yml
+-->
+
 ## (Nome código não definido)
 
 ## guira-guira
