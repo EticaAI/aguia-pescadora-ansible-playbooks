@@ -10,7 +10,7 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
-[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks) ![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)
+[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks) [![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)](https://aguia-pescadora.etica.ai/evolucao/)
 
 ---
 
@@ -23,24 +23,7 @@ git clone -b v2.0-alpha --single-branch https://github.com/EticaAI/aguia-pescado
 ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
 ```
 
-<!--
-```bash
-# TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
-# @see https://github.com/EticaAI/aguia-pescadora/issues/27
-git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
-ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
-```
-
--->
-
-<!--
-Exemplo com 3 nós:
-ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
-
-Exemplo que estou testando:
-ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
-
--->
+Resultado:
 
 > - Tsuru URLs:
 >   - https://tsuru.example.com
@@ -53,23 +36,23 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
 >   - https://mi-aplicación-tre.app.example.com
 >   - ...
 
+[![asciicast](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB.svg)](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB)
+
 ---
 
 <!-- TOC depthFrom:1 -->
 
 - [Ansible Playbooks da Águia Pescadora](#ansible-playbooks-da-águia-pescadora)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
-        - [Executar os Playbooks](#executar-os-playbooks)
-            - [1-node](#1-node)
-            - [1-node-tsuru-autossl](#1-node-tsuru-autossl)
+        - [2.0.x alpha](#20x-alpha)
+            - [Roles](#roles)
+                - [paas-host](#paas-host)
+                - [tsuru-installer](#tsuru-installer)
+        - [Outras versões](#outras-versões)
         - [Requisitos](#requisitos)
             - [Seu computador local](#seu-computador-local)
                 - [Instalação do Ansible](#instalação-do-ansible)
             - [Servidores remotos](#servidores-remotos)
-    - [Sobre este Ansible Playbook](#sobre-este-ansible-playbook)
-        - [Roles](#roles)
-            - [paas-host](#paas-host)
-            - [tsuru-installer](#tsuru-installer)
                 - [Acompanhar resultado to tsuru install-create](#acompanhar-resultado-to-tsuru-install-create)
     - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
         - [Ansible](#ansible)
@@ -92,31 +75,54 @@ ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl
 
 ## Como usar o aguia-pescadora-ansible-playbooks
 
-Documentação mais específica em [aguia-pescadora.md](aguia-pescadora.md)
+### 2.0.x alpha
 
-### Executar os Playbooks
-A pessoa mantenedora, Emerson Rocha, recentemente começou a usar Ansible e ainda
-está convertendo scripts e estratégias para o novo padrão. Pode levar um tempo
-até implementação desse nível de automação, porém pode ajudar em especial
-reuso por colegas. Grato pela compreensão :).
+Neste momento apenas a versão 2.0.x-alpha (que tem seu passo a passo muito
+resumidamente) explicada no início deste documento em "TL;DR" está documentada.
 
-#### 1-node
-![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
-Águia Pescadora PaaS Tudo-Em-Um-Nó.
+Note que a 2.0.x **não** usa Kubernetes ou K3S e é uma versão de apenas 1 nó,
+porém automatizada do que antes era documentado em [EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo).
 
-```bash
-ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node.yml
-```
+#### Roles
 
-#### 1-node-tsuru-autossl
-![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
-Águia Pescadora PaaS Tudo-Em-Um-Nó (Tsuru PaaS, Minio, AutoSSL via OpenResty).
-Esta opção não usa Kubernetes ou k3s.
+<!--
+ #### common
 
-```bash
-ansible-playbook -i inventory/1-node-exemplo/inventory.ini  1-node-tsuru-autossl.yml
-```
+- [common](roles/common/README.md)
+-->
 
+##### paas-host
+
+- [paas-host](roles/paas-host/README.md)
+
+`paas-host` é a função responsável por preparar a(s) VPSs para fazer
+terminação TLS (isto é, servir o primeiro acesso HTTPS) que chegam no servidor.
+Usa o [OpenResty](https://github.com/openresty/openresty) +
+[GUI/lua-resty-auto-ssl](https://github.com/GUI/lua-resty-auto-ssl).
+
+##### tsuru-installer
+
+- [tsuru-installer](roles/tsuru-installer/README.md)
+
+Oferece uma versão mais limitada do que o fantástico
+[Tsuru Installer](https://docs.tsuru.io/stable/installing/using-tsuru-installer.html)
+automatizaria por você.
+
+A função dele é criar na pasta [tsuru-initialization-configs](tsuru-initialization-configs/)
+os arquivos de configuração que são parâmetros usados na chamada
+`tsuru install-create -c install-config.yml -e install-compose.yml`. Caso você
+não tenha o [Docker](https://docs.docker.com/install/),
+[Docker Machine](https://docs.docker.com/machine/install-machine/) e o
+[Tsuru Client](https://tsuru-client.readthedocs.io/en/latest/installing.html)
+irá alertar.
+
+### Outras versões
+
+Registro de outras versões da 2.5.x (que pretende ser o meio caminho até a 3.0)
+pode ser vista no arquivo [aguia-pescadora.md](aguia-pescadora.md).
+
+Veja também <https://aguia-pescadora.etica.ai/evolucao> para ter uma ideia geral
+da evolução.
 ### Requisitos
 
 #### Seu computador local
@@ -151,47 +157,6 @@ servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
 - **Autenticação por chave privada**
     - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
-
-## Sobre este Ansible Playbook
-
-### Roles
-
-<!--
- #### common
-
-- [common](roles/common/README.md)
--->
-
-#### paas-host
-
-- [paas-host](roles/paas-host/README.md)
-
-`paas-host` é a função responsável por preparar a(s) VPSs para fazer
-terminação TLS (isto é, servir o primeiro acesso HTTPS) que chegam no servidor.
-Usa o [OpenResty](https://github.com/openresty/openresty) +
-[GUI/lua-resty-auto-ssl](https://github.com/GUI/lua-resty-auto-ssl).
-
-#### tsuru-installer
-
-- [tsuru-installer](roles/tsuru-installer/README.md)
-
-Oferece uma versão mais limitada do que o fantástico
-[Tsuru Installer](https://docs.tsuru.io/stable/installing/using-tsuru-installer.html)
-automatizaria por você.
-
-A função dele é criar na pasta [tsuru-initialization-configs](tsuru-initialization-configs/)
-os arquivos de configuração que são parâmetros usados na chamada
-`tsuru install-create -c install-config.yml -e install-compose.yml`. Caso você
-não tenha o [Docker](https://docs.docker.com/install/),
-[Docker Machine](https://docs.docker.com/machine/install-machine/) e o
-[Tsuru Client](https://tsuru-client.readthedocs.io/en/latest/installing.html)
-irá alertar.
-
-<!--
-As principais diferenças entre a documentação padrão do Tsuru são:
-1. Gera arquivos de configuração
-
--->
 
 ##### Acompanhar resultado to tsuru install-create
 

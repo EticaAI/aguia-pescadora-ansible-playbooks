@@ -1,4 +1,4 @@
-1-node-tsuru-docker
+paas-host
 =========
 
 Um guia sem automação de ansible de como fazer algo parecido pode ser lido em
@@ -11,6 +11,14 @@ Veja também
 - https://github.com/fititnt/cplp-aiops/tree/master/logbook/aguia-pescadora-charlie/__external-configs
 - https://github.com/EticaAI/aguia-pescadora/issues/26
 - https://github.com/EticaAI/aguia-pescadora/blob/master/diario-de-bordo/delta.sh
+
+
+Arquivos 
+
+- Erros do OpenResty (NGinx, AutoSSL, proxy de entrada...)
+    - `/usr/local/openresty/nginx/logs/error.log`
+- Acesso do OpenResty (NGinx, AutoSSL, proxy de entrada...)
+    - `/usr/local/openresty/nginx/logs/access.log`
 
 Requirements
 ------------
