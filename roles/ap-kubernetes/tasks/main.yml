@@ -1,5 +1,12 @@
 ---
 # tasks file for ap-kubernetes
 
-- name: microk8s
-  include: microk8s.yml
+# TODO: remover microk8s e usar minikube pra deploys pequenos 
+#       Veja https://github.com/EticaAI/aguia-pescadora/issues/22#issuecomment-511173156
+#       (fititnt, 2019-07-14 01:53 BRT)
+
+#- name: microk8s
+#  include: microk8s.yml
+
+- name: minikube
+  include: minikube.yml
