@@ -45,3 +45,35 @@ ansible-lint macarico-solitario.yml
 "Alta Disponibilidade"
 > https://www.jstor.org/stable/3676971?seq=1#page_scan_tab_contents
 > http://conexaoplaneta.com.br/blog/aves-brasileiras-superpoderosas-e-supermaes-com-qual-sua-mae-ou-voce-se-identifica/
+
+---
+
+## Referências sobre a pilha de soluções da Águia Pescadora
+
+### Ansible
+
+#### Documentação Ansible-BR
+- <http://ansible-br.org/>
+
+#### Documentação oficial do Ansible
+- <https://docs.ansible.com/> <sup>(Inglês)</sup>
+
+### Kubernetes
+
+#### Documentação oficial do Kubernetes
+
+- <https://kubernetes.io/docs/> <sup>(Inglês)</sup>
+
+<!--
+@TODO ver projetos extras de interesse potencial do usuário (fititnt, 2019-06-28 09:31 BRT)
+-->
+
+## Referência de projetos semelhantes
+
+### Kubespray
+
+Kubespray é mantido pelos grupos de interesse especial do Kubernetes e documenta
+como por um cluster de Kubernentes pronto para uso em produção
+
+- Ansible Playbook: <https://github.com/kubernetes-sigs/kubespray> <sup>(Inglês)</sup>
+- Documentação: <https://kubespray.io> <sup>(Inglês)</sup>

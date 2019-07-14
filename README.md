@@ -8,19 +8,24 @@ e o projeto original, [fititnt/cplp-aiops](https://github.com/fititnt/cplp-aiops
 O link para lista completa dos servidores da Etica.AI pode ser vista no painel da
 organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/orgs/EticaAI/projects/2) <sup>inglês</sup>_.
 
+Veja versões lançadas em <https://github.com/EticaAI/aguia-pescadora-ansible-playbooks/releases>.
+
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
-[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks) [![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)](https://aguia-pescadora.etica.ai/evolucao/)
+[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks)
 
 ---
 
 **TL;DR:**
 
-Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
+[![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)](https://aguia-pescadora.etica.ai/evolucao/) Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
 
 ```bash
 git clone -b v2.0-alpha --single-branch https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
 ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
+
+# Senha do Admin do tsuru: tsuru-initialization-configs/tsuru-install.log
+# Senha do Minio: example.com:/usr/local/share/minio/.minio.sys/config/config.json
 ```
 
 Resultado:
@@ -48,20 +53,11 @@ Resultado:
             - [Roles](#roles)
                 - [paas-host](#paas-host)
                 - [tsuru-installer](#tsuru-installer)
-        - [Outras versões](#outras-versões)
-        - [Requisitos](#requisitos)
-            - [Seu computador local](#seu-computador-local)
-                - [Instalação do Ansible](#instalação-do-ansible)
-            - [Servidores remotos](#servidores-remotos)
+            - [Requisitos](#requisitos)
+                - [Seu computador local](#seu-computador-local)
+                    - [Instalação do Ansible](#instalação-do-ansible)
+                - [Servidores remotos](#servidores-remotos)
                 - [Acompanhar resultado to tsuru install-create](#acompanhar-resultado-to-tsuru-install-create)
-    - [Referências sobre a pilha de soluções da Águia Pescadora](#referências-sobre-a-pilha-de-soluções-da-águia-pescadora)
-        - [Ansible](#ansible)
-            - [Documentação Ansible-BR](#documentação-ansible-br)
-            - [Documentação oficial do Ansible](#documentação-oficial-do-ansible)
-        - [Kubernetes](#kubernetes)
-            - [Documentação oficial do Kubernetes](#documentação-oficial-do-kubernetes)
-    - [Referência de projetos semelhantes](#referência-de-projetos-semelhantes)
-        - [Kubespray](#kubespray)
 - [Licença](#licença)
     - [Licença de aguia-pescadora-ansible-playbooks](#licença-de-aguia-pescadora-ansible-playbooks)
 
@@ -84,12 +80,6 @@ Note que a 2.0.x **não** usa Kubernetes ou K3S e é uma versão de apenas 1 nó
 porém automatizada do que antes era documentado em [EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo).
 
 #### Roles
-
-<!--
- #### common
-
-- [common](roles/common/README.md)
--->
 
 ##### paas-host
 
@@ -116,18 +106,11 @@ não tenha o [Docker](https://docs.docker.com/install/),
 [Tsuru Client](https://tsuru-client.readthedocs.io/en/latest/installing.html)
 irá alertar.
 
-### Outras versões
+#### Requisitos
 
-Registro de outras versões da 2.5.x (que pretende ser o meio caminho até a 3.0)
-pode ser vista no arquivo [aguia-pescadora.md](aguia-pescadora.md).
+##### Seu computador local
 
-Veja também <https://aguia-pescadora.etica.ai/evolucao> para ter uma ideia geral
-da evolução.
-### Requisitos
-
-#### Seu computador local
-
-##### Instalação do Ansible
+###### Instalação do Ansible
 Visite <https://docs.ansible.com/> e escolha uma forma de instalação mais
 apropriada para seu sistema operacional e instale no seu computador local (ou
 no computador que remoto que pretende usar). Note que Ansible não requer agente
@@ -144,7 +127,7 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
-#### Servidores remotos
+##### Servidores remotos
 
 Note que o nível de automação que aguia-pescadora-ansible-playbooks fornece
 pode ser suficiente para ter uma versão de Águia Pescadora aceitavelmente ok
@@ -155,7 +138,7 @@ servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
     - Versão mais testada. Você pode tentar em outras com alterações nestes
       playbooks.
 - **Autenticação por chave privada**
-    - Caso opte por instalar com o 1-node.yml o `tsuru-client` requer que a
+    - Caso opte por instalar com o tldr.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
 
 ##### Acompanhar resultado to tsuru install-create
@@ -169,41 +152,14 @@ tail -f tsuru-initialization-configs/tsuru-install.log
 ```
 
 Note que o arquivo acima inclusive a senha do administrador inicial.
-Mais informações em breve.
-
-## Referências sobre a pilha de soluções da Águia Pescadora
-
-### Ansible
-
-#### Documentação Ansible-BR
-- <http://ansible-br.org/>
-
-#### Documentação oficial do Ansible
-- <https://docs.ansible.com/> <sup>(Inglês)</sup>
-
-### Kubernetes
-
-#### Documentação oficial do Kubernetes
-
-- <https://kubernetes.io/docs/> <sup>(Inglês)</sup>
-
-<!--
-@TODO ver projetos extras de interesse potencial do usuário (fititnt, 2019-06-28 09:31 BRT)
--->
-
-## Referência de projetos semelhantes
-
-### Kubespray
-
-Kubespray é mantido pelos grupos de interesse especial do Kubernetes e documenta
-como por um cluster de Kubernentes pronto para uso em produção
-
-- Ansible Playbook: <https://github.com/kubernetes-sigs/kubespray> <sup>(Inglês)</sup>
-- Documentação: <https://kubespray.io> <sup>(Inglês)</sup>
 
 # Licença
 
+<!--
+
 _@TODO: explicar sobre licenças extras (fititnt, 2019-06-30 05:53 BRT)_
+
+-->
 
 ## Licença de aguia-pescadora-ansible-playbooks
 

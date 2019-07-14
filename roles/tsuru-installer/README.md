@@ -24,6 +24,7 @@ Requirements
 Em <https://github.com/EticaAI/aguia-pescadora/blob/master/diario-de-bordo/tsuru-inicializacao/seu-computador.sh>
 explica como instalar tais requerimentos
 
+<!--
 Role Variables
 --------------
 
@@ -42,6 +43,8 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: servers
       roles:
          - { role: username.rolename, x: 42 }
+
+-->
 
 License
 -------
