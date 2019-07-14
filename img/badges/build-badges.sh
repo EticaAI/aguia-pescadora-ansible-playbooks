@@ -9,4 +9,4 @@
 python -m pybadges --left-text='GitHub' --right-text='EticaAI/aguia-pescadora-ansible-playbooks' --right-color='#237c02' > github.svg
 python -m pybadges --left-text='Website' --right-text='aguia-pescadora.etica.ai' --right-color='#237c02' > website.svg
 python -m pybadges --left-text='Situação' --right-text='Trabalho em Progresso' --right-color='#FF773D' > status-work-in-progress.svg
-python -m pybadges --left-text='Versão' --right-text='2.5-alpha' --right-color='#FF773D' > version-2.5-alpha.svg
+python -m pybadges --left-text='Versão' --right-text='2.0-alpha' --right-color='#FF773D' > version-2.0-alpha.svg

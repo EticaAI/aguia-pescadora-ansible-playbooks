@@ -1,6 +1,6 @@
 ---
 
-# ansible-playbook tldr.yml -e paas_host=aguia-pescadora-delta.etica.ai
+# ansible-playbook tldr.yml -e paas_host=aguia-pescadora-delta.etica.ai -e paas_ip=173.249.10.99
 
 ### 'git clone' falhou? ________________________________________________________
 # Você precisa instalar o Git https://git-scm.com
@@ -35,16 +35,39 @@
   hosts: localhost
   connection: local
   tasks:
-  - name: modo para forçar servidor de destino como target
-    add_host:
-      name: "{{ paas_host }}"
-      groups: paas_host
-    changed_when: false
+    - name: modo para forçar servidor de destino como target
+      add_host:
+        name: "{{ paas_host }}"
+        groups: paas_host
+      changed_when: false
 
-- name: Checagem se você tem acesso via SSH ao paas_host definido (se falhar, você PRECISA que o ansible pelo menos consiga acessar via SSH!) 
+- name: Checagem se você tem acesso via SSH ao paas_host definido (se falhar, você PRECISA que o ansible pelo menos consiga acessar via SSH!)
   hosts: paas_host
-  # gather_facts: false
+  gather_facts: true
   tasks:
     - name: Tem acesso?
       debug:
         msg: "Tesde de acesso ao {{ ansible_host }}"
+
+- name: "Prepara o Host que vai conter o Tsuru (Instala o OpenResty com AutoSSL e o Minio)"
+  hosts: paas_host
+  remote_user: root
+  roles:
+    - common
+    - minio
+    - paas-host
+
+- name: "Usando Tsuru Client desta máquina local, instala o Tsuru server na máquina destino"
+  hosts: localhost
+  vars:
+    paas_master_ip: "{{ paas_ip }}"
+    paas_node1_ip: "{{ paas_ip }}"
+    paas_cluster_name: "{{ paas_host }}"
+  roles:
+    - tsuru-installer
+#  tasks:
+#    - name: Tem acesso?
+#      debug:
+#        msg: "paas_ip {{ paas_ip }}"
+
+# TODO: implementar outras melhorias de 1-node-tsuru-autossl.yml (fititnt, 2019-07-14 04:00 BRT)

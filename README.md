@@ -10,7 +10,7 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
-[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks) ![Versão: 2.5-alpha](img/badges/version-2.5-alpha.svg)
+[![Website: aguia-pescadora.etica.ai](img/badges/website.svg)](https://aguia-pescadora.etica.ai) [![GitHub: EticaAI/aguia-pescadora-ansible-playbooks](img/badges/github.svg)](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks) ![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)
 
 ---
 
@@ -19,11 +19,19 @@ organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/o
 Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
 
 ```bash
+git clone -b v2.0-alpha --single-branch https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
+ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
+```
+
+<!--
+```bash
 # TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
 # @see https://github.com/EticaAI/aguia-pescadora/issues/27
 git clone https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
 ansible-playbook 1-node-tsuru-autossl.yml -e paas_host=example.com
 ```
+
+-->
 
 <!--
 Exemplo com 3 nós:

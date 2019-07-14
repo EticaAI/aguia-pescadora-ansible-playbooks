@@ -86,6 +86,6 @@
   shell: openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj '/CN=sni-support-required-for-valid-ssl' -keyout /etc/ssl/resty-auto-ssl-fallback.key -out /etc/ssl/resty-auto-ssl-fallback.crt
   become: yes
   register: is_restyautossl_fallbackkey
-  when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
+  #when: restyautossl_folder.stat.isdir is defined and restyautossl_folder.stat.isdir
 
 # TODO: resolver problema de fallbackkey não estar sendo criada automaticamente (fititnt, 2019-07-03 23:34 BRT)

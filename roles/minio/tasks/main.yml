@@ -69,6 +69,10 @@
   notify:
     - restart minio
 
+- name: COMO SABER SUA SENHA?
+  debug:
+    msg: "Veja o arquivo  /usr/local/share/minio/.minio.sys/config/config.json no servidor em que foi instalado o PaaS"
+
 # Keys estão aqui (num arquivo json)
 # root@aguia-pescadora-foxtrot:~# cat /usr/local/share/minio/.minio.sys/config/config.json 
 
