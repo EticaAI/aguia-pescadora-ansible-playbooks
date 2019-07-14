@@ -6,3 +6,16 @@
 #    espalhados, mas nunca em grupos."
 
 # @TODO: iniciar modo de 1 nó, com Kubernetes
+
+- name: "macarico-solitario"
+  hosts: all
+  remote_user: root
+  vars:
+    paas_host: "{{ inventory_hostname }}"
+    # tsuru_target: "tsuru.{{paas_host}}
+    # apps_domain: "app.{{paas_host}}"
+
+  roles:
+    - common
+    # - minio
+    # - paas-host

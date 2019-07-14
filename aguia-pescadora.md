@@ -32,7 +32,7 @@ https://www.wikiaves.com.br/wiki/macarico-solitario
 -->
 
 ```bash
-ansible-playbook -i macarico-solitario  macarico-solitario.yml
+ansible-playbook -i inventory/macarico-solitario macarico-solitario.yml
 ```
 
 ## (Nome código não definido)
