@@ -1,49 +1,50 @@
 ---
 
-# Playbook construído para ser a tentativa mais fácil possível para alguém que
-# já sabe o que fazer mas não quer ler toda documentação
+# ansible-playbook tldr.yml -e paas_host=aguia-pescadora-delta.etica.ai
 
-# TODO: escrever um tldr.yml (fititnt, 2019-07-01 30:57 BRT)
-# @see https://github.com/EticaAI/aguia-pescadora/issues/27
+### 'git clone' falhou? ________________________________________________________
+# Você precisa instalar o Git https://git-scm.com
 
-# ansible-lint tldr.yml
-# ansible-playbook tldr.yml -e tsuru_host=aguia-pescadora-delta.etica.ai
+### 'ansible-playbook' falhou (não está instalado)? ____________________________
+# Você precisa instalar ele para rodar este arquivo. https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
-
-# @see https://stackoverflow.com/questions/33222641/override-hosts-variable-of-ansible-playbook-from-the-command-line
+### Você tsuru client na sua máquina local? ____________________________________
+### Você docker na sua máquina local? __________________________________________
+### Você docker-machine na sua máquina local? __________________________________
+# As checagens a seguir fazem isso antes mesmo do usuário seguir adiante. Porém
+# nos NÃO instalamos na máquina local para o usuário. Como ansible não está
+# ignorando erros, o usuário irá ver bem claro a falha e o link direto para
+# documentação da instalação
 
 - name: tldr tsuru client? docker? docker-machine?
   hosts: localhost
   tasks:
     - name: tsuru client? https://tsuru-client.readthedocs.io/en/latest/installing.html
       shell: tsuru --version
-      register: result
       ignore_errors: false
 
     - name: docker? https://docs.docker.com/install/
       shell: docker --version
-      register: result2
       ignore_errors: false
 
     - name: docker-machine? https://docs.docker.com/machine/install-machine/
       shell: docker-machine version
-      register: result3
       ignore_errors: false
 
-- name: tldr
+- name: Hack para permitir o não uso de ansible inventory e forçar -e paas_host=example.com como host alvo
   hosts: localhost
   connection: local
   tasks:
   - name: modo para forçar servidor de destino como target
     add_host:
-      name: "{{ tsuru_host }}"
-      groups: tsuru_host
+      name: "{{ paas_host }}"
+      groups: paas_host
     changed_when: false
 
-- name: tldr, target
-  hosts: tsuru_host
-  gather_facts: false
+- name: Checagem se você tem acesso via SSH ao paas_host definido (se falhar, você PRECISA que o ansible pelo menos consiga acessar via SSH!) 
+  hosts: paas_host
+  # gather_facts: false
   tasks:
-    - name: teste se fucionou
+    - name: Tem acesso?
       debug:
-        msg: "I'm on {{ ansible_host }}"
+        msg: "Tesde de acesso ao {{ ansible_host }}"
