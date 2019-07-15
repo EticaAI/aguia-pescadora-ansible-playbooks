@@ -18,7 +18,7 @@ Acompanhe as versões lançadas usando Ansible em <https://github.com/EticaAI/ag
 
 ---
 
-### TL;DR
+### TL;DR do 2.0-alpha
 
 [![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)](https://aguia-pescadora.etica.ai/evolucao/) Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
 
@@ -47,46 +47,18 @@ estrutura de URLs semelhante a esta:
 >   - https://mi-aplicación-tre.app.example.com
 >   - ...
 
-#### Limitações da 2.0-alpha
-
-Pontos de melhoria (i.e. o que poderia, mas não tem, automaticamente configurado):
-
-- Não usa Kubernetes ou K3S (o que não necessariamente é ponto negativo)
-- Tsuru Gandalf (isto é, permitir por em produção usando `git push` em vez de `tsuru app-deploy --app meuapp .` )
-- Tsuru MySQL As A Service (alternativa: usar MySQL via app com Docker)
-- Tsuru PostgreSQL As A Service (alternativa: usar PostgreSQL via app com docker)
-- Tsuru volumes
-
-<!--
-> Aviso: a versão da 2.0 provavelmente nunca sair nem mesmo de versão alpha é
-que o foco tenderá a ser uma implementação do Águia Pescadora otimizada com
-Kubernetes em vez de Docker; esté é o motivo de existir referências a uma versão
-3.0 ou 2.5.
--->
-
-<!--
-Comentários adicionais pertinentes:
-
-- Como foco é preparar a 3.0 (com Kubernetes) e otimizar gerenciamento do dia a
-  dia em produção versão 2.0 (que permanecerá usando apenas docker)
-  provavelmente não sairá de versões alpha.
-- Talvez algumas funcionalidades da 2.5 ou 3.0 sejam adicionadas na 2.x em
-  especial se os requisitos de hardware for maior; não obstante as versões 2.x,
-  não vão ser otimizadas para clusters maiores do que 1 e modo de
-  'alta disponibilidade';
-
--->
-
 ---
 
 <!-- TOC depthFrom:1 -->
 
 - [Ansible Playbooks da Águia Pescadora](#ansible-playbooks-da-águia-pescadora)
-        - [TL;DR](#tldr)
-            - [Limitações da 2.0-alpha](#limitações-da-20-alpha)
+        - [TL;DR do 2.0-alpha](#tldr-do-20-alpha)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [2.0.x alpha](#20x-alpha)
-            - [Roles](#roles)
+            - [Instalação da 2.0.x alpha](#instalação-da-20x-alpha)
+            - [O que a versão 2.0.x alpha automatiza por você](#o-que-a-versão-20x-alpha-automatiza-por-você)
+            - [Limitações da versão 2.0.x alpha](#limitações-da-versão-20x-alpha)
+            - [Ansible Roles da versão 2.0.x alpha](#ansible-roles-da-versão-20x-alpha)
                 - [paas-host](#paas-host)
                 - [tsuru-installer](#tsuru-installer)
             - [Requisitos](#requisitos)
@@ -107,15 +79,85 @@ Comentários adicionais pertinentes:
 
 ## Como usar o aguia-pescadora-ansible-playbooks
 
+Note que a 2.0.x alpha **não** usa Kubernetes ou K3S e é uma versão de apenas 1 nó,
+porém automatizada do que antes era documentado em [EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo) e que é mais flexível (porém exige conhecimento mais avançado
+pra testes rapidos e ler o passo a passo).
+
 ### 2.0.x alpha
 
-Neste momento apenas a versão 2.0.x-alpha (que tem seu passo a passo muito
-resumidamente) explicada no início deste documento em "TL;DR" está documentada.
+#### Instalação da 2.0.x alpha
+Uma das formas de instalar a versão 2.0.x alpha é a seguinte:
 
-Note que a 2.0.x **não** usa Kubernetes ou K3S e é uma versão de apenas 1 nó,
-porém automatizada do que antes era documentado em [EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo).
+```bash
+git clone -b v2.0-alpha --single-branch https://github.com/EticaAI/aguia-pescadora-ansible-playbooks.git .
+ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
 
-#### Roles
+# Senha do Admin do tsuru: tsuru-initialization-configs/tsuru-install.log
+# Senha do Minio: example.com:/usr/local/share/minio/.minio.sys/config/config.json
+```
+
+#### O que a versão 2.0.x alpha automatiza por você
+
+- PaaS 1 nó (master e workers na mesma VPS)
+  - Recomendamos Ubuntu 18.04
+  - Hardware mínimo: 1vCPU, 512MB RAM, 10GB disco
+- [OpenResty (fork do NGinx)](https://openresty.org) com [GUI/lua-resty-auto-ssl](https://github.com/GUI/lua-resty-auto-ssl)
+  - Função:
+    - faz terminação TLS (isto é, servir o primeiro acesso HTTPS) que chegam no servidor.
+    - Note: ele obtem SSL para _qualquer_ domínio que aponte para seu servidor
+      sem invervenção manual de administrador o que pode ser extremamente
+      interessante e prático para quem está vindo de outros ambinetes que
+      oferecem let's encript de graça; porém pode exigir ajustes extras para
+      quem não precisa disto
+- [Minio](https://min.io/)
+- Tsuru Server com core components (via [tsuru Installer](https://docs.tsuru.io/stable/installing/using-tsuru-installer.html)), em especial:
+  - Tsuru Dashboard / Tsuru API
+  - Database para o Tsuru (MongoDB, é usado apenas pelo próprio Tsuru)
+  - Queue/Cache para o Tsuru (Redis, é usado apenas pelo próprio Tsuru)
+  - Docker Registry
+  - PlanB (Usado apelas pelo Tsuru, não serve HTTP ou HTTPS para fora do cluster)
+  - Docker
+
+A versão 2.0.x alpha é uma implementação mais reduzida (porém automatizada) do
+[EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo)
+documenta ser possível. Em vez de dar "todas as opções" e exigir que o usuário
+tenha que ler outras dezenas de referências extenas ela procura ser primeira
+versão pública da Etica.AI de um PaaS "Faça-você-mesmo" que consiga ser
+compatível caso você queira aproveitar apenas a documentação e experiência com
+pilha de soluções da Águia Pescadora sem usar a hospedagem gratuita.
+
+Para quem tem conhecimento técnico prévio mais avançado você talvez pode usar o
+[EticaAI/aguia-pescadora/diario-de-bordo](https://github.com/EticaAI/aguia-pescadora/tree/master/diario-de-bordo)
+ou tomar como ponto de partida a instalação do Tsuru em
+<https://docs.tsuru.io/stable/installing/index.html>. Como o número de pessoas
+desenvolvedores realmente criando uma PaaS é reduzida ainda assim você pode se
+beneficiar de partes do que é testamos e como documentação/código são liberados
+não apenas como código aberto, mas como dedicados ao domínio publico você pode
+reaproveitar em outros projetos. Porém note que não temos como dar suporte nem
+fazer garantias além da que nosso trabalho é feito em boa fé e que de fazemos
+isso como estratégias para projetos como o <https://cplp.etica.ai/>.
+
+#### Limitações da versão 2.0.x alpha
+
+Pontos de melhoria (isto é, o que NÃO é configurado automaticamente):
+
+- Não expõe como configurar mais de um nó (porém isso pode simplificar não apenas custos, mas trabalho do administrador que não requer alta disponibilidade)
+- Não usa Kubernetes ou K3S (o que não necessariamente é ponto negativo)
+- Tsuru Gandalf (isto é, permitir por em produção usando `git push` em vez de `tsuru app-deploy --app meuapp .` )
+- Tsuru MySQL As A Service (alternativa: usar MySQL via app com Docker)
+- Tsuru PostgreSQL As A Service (alternativa: usar PostgreSQL via app com docker)
+- Tsuru volumes
+
+A versão do 2.0.x alpha lançaca mesmo apelidada de `tldr.yml` ainda requer que
+a pessoa tenha que resolver alguns [Requisitos](#Requisitos). Porém tenha em
+mente que ao menos ela não tem aprisionamento tecnológico de forçar que use
+um provedor específico de infraestrutura (que geralmente são mais caros). E
+nosso público alvo não teria tais recursos financeiros. Porém no futuro talvez
+consigamos simplificar ainda mais.
+
+<!--
+
+#### Ansible Roles da versão 2.0.x alpha
 
 ##### paas-host
 
@@ -141,6 +183,8 @@ não tenha o [Docker](https://docs.docker.com/install/),
 [Docker Machine](https://docs.docker.com/machine/install-machine/) e o
 [Tsuru Client](https://tsuru-client.readthedocs.io/en/latest/installing.html)
 irá alertar.
+
+-->
 
 #### Requisitos
 
