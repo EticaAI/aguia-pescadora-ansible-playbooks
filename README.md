@@ -8,7 +8,9 @@ e o projeto original, [fititnt/cplp-aiops](https://github.com/fititnt/cplp-aiops
 O link para lista completa dos servidores da Etica.AI pode ser vista no painel da
 organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/orgs/EticaAI/projects/2) <sup>inglês</sup>_.
 
-Veja versões lançadas em <https://github.com/EticaAI/aguia-pescadora-ansible-playbooks/releases>.
+Acompanhe as versões lançadas usando Ansible em <https://github.com/EticaAI/aguia-pescadora-ansible-playbooks/releases>.
+
+<!-- https://aguia-pescadora.etica.ai/evolucao -->
 
 [![Banner Águia Pescadora - © Andy Morffew www.andymorffew.com](img/aguia-pescadora-banner.jpg)](https://aguia-pescadora.etica.ai/)
 
@@ -16,7 +18,7 @@ Veja versões lançadas em <https://github.com/EticaAI/aguia-pescadora-ansible-p
 
 ---
 
-**TL;DR:**
+### TL;DR
 
 [![Versão: 2.0-alpha](img/badges/version-2.0-alpha.svg)](https://aguia-pescadora.etica.ai/evolucao/) Ubuntu Server 18.04, 1vCPU, 512MB RAM, 10GB disco
 
@@ -27,8 +29,12 @@ ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
 # Senha do Admin do tsuru: tsuru-initialization-configs/tsuru-install.log
 # Senha do Minio: example.com:/usr/local/share/minio/.minio.sys/config/config.json
 ```
+Exemplo de execução do início ao fim dos passos acima:
 
-Resultado:
+[![asciicast](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB.svg)](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB)
+
+Sem configurações extras, uma implementação baseada na versão acima teria uma
+estrutura de URLs semelhante a esta:
 
 > - Tsuru URLs:
 >   - https://tsuru.example.com
@@ -41,13 +47,43 @@ Resultado:
 >   - https://mi-aplicación-tre.app.example.com
 >   - ...
 
-[![asciicast](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB.svg)](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB)
+#### Limitações da 2.0-alpha
+
+Pontos de melhoria (i.e. o que poderia, mas não tem, automaticamente configurado):
+
+- Não usa Kubernetes ou K3S (o que não necessariamente é ponto negativo)
+- Tsuru Gandalf (isto é, permitir por em produção usando `git push` em vez de `tsuru app-deploy --app meuapp .` )
+- Tsuru MySQL As A Service (alternativa: usar MySQL via app com Docker)
+- Tsuru PostgreSQL As A Service (alternativa: usar PostgreSQL via app com docker)
+- Tsuru volumes
+
+<!--
+> Aviso: a versão da 2.0 provavelmente nunca sair nem mesmo de versão alpha é
+que o foco tenderá a ser uma implementação do Águia Pescadora otimizada com
+Kubernetes em vez de Docker; esté é o motivo de existir referências a uma versão
+3.0 ou 2.5.
+-->
+
+<!--
+Comentários adicionais pertinentes:
+
+- Como foco é preparar a 3.0 (com Kubernetes) e otimizar gerenciamento do dia a
+  dia em produção versão 2.0 (que permanecerá usando apenas docker)
+  provavelmente não sairá de versões alpha.
+- Talvez algumas funcionalidades da 2.5 ou 3.0 sejam adicionadas na 2.x em
+  especial se os requisitos de hardware for maior; não obstante as versões 2.x,
+  não vão ser otimizadas para clusters maiores do que 1 e modo de
+  'alta disponibilidade';
+
+-->
 
 ---
 
 <!-- TOC depthFrom:1 -->
 
 - [Ansible Playbooks da Águia Pescadora](#ansible-playbooks-da-águia-pescadora)
+        - [TL;DR](#tldr)
+            - [Limitações da 2.0-alpha](#limitações-da-20-alpha)
     - [Como usar o aguia-pescadora-ansible-playbooks](#como-usar-o-aguia-pescadora-ansible-playbooks)
         - [2.0.x alpha](#20x-alpha)
             - [Roles](#roles)
