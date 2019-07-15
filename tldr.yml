@@ -1,6 +1,5 @@
 ---
-
-# ansible-playbook tldr.yml -e paas_host=aguia-pescadora-delta.etica.ai -e paas_ip=173.249.10.99
+# EticaAI/aguia-pescadora-ansible-playbooks/tldr.yml
 
 ### 'git clone' falhou? ________________________________________________________
 # Você precisa instalar o Git https://git-scm.com
@@ -65,9 +64,4 @@
     paas_cluster_name: "{{ paas_host }}"
   roles:
     - tsuru-installer
-#  tasks:
-#    - name: Tem acesso?
-#      debug:
-#        msg: "paas_ip {{ paas_ip }}"
 
-# TODO: implementar outras melhorias de 1-node-tsuru-autossl.yml (fititnt, 2019-07-14 04:00 BRT)

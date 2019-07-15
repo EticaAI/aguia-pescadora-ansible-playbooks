@@ -1,14 +1,18 @@
 # Ansible Playbooks da Águia Pescadora
 
-**![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg) Infraestrutura como Código da
-[Águia Pescadora](https://https://aguia-pescadora.etica.ai/) com Playbooks de Ansible. Veja também
-[EticaAI/aguia-pescadora](https://github.com/EticaAI/aguia-pescadora)
-e o projeto original, [fititnt/cplp-aiops](https://github.com/fititnt/cplp-aiops).**
+**![Situação: Trabalho em Progresso](img/badges/status-work-in-progress.svg)
+Infraestrutura como Código da [Águia Pescadora](https://aguia-pescadora.etica.ai/)
+(_a evolução do [cplp-aiops](https://github.com/fititnt/cplp-aiops)_)
+com playbooks de Ansible especialmente preparado para pessoas com menor
+experiência em infraestrutura ou acesso a recursos financeiros possam replicar.
+Trabalho (tanto códigos como documentação) dedicados ao domínio público.**
 
 O link para lista completa dos servidores da Etica.AI pode ser vista no painel da
 organização em _[Etica.AI Infrastructure: Clusters & VPS](https://github.com/orgs/EticaAI/projects/2) <sup>inglês</sup>_.
 
+<!--
 Acompanhe as versões lançadas usando Ansible em <https://github.com/EticaAI/aguia-pescadora-ansible-playbooks/releases>.
+-->
 
 <!-- https://aguia-pescadora.etica.ai/evolucao -->
 
@@ -31,7 +35,7 @@ ansible-playbook tldr.yml -e paas_host=example.com -e paas_ip=123.123.123.123
 ```
 Exemplo de execução do início ao fim dos passos acima:
 
-[![asciicast](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB.svg)](https://asciinema.org/a/18k4z7mCYgBgSQbI3eiZ6RrdB)
+[![asciicast](https://asciinema.org/a/XVvYrlSyQPeipOX1GHwYdy5bR.svg)](https://asciinema.org/a/XVvYrlSyQPeipOX1GHwYdy5bR)
 
 Sem configurações extras, uma implementação baseada na versão acima teria uma
 estrutura de URLs semelhante a esta:
