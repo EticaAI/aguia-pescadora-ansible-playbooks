@@ -15,6 +15,8 @@ variáveis e então mantê-los privados.**
 
 ## Sobre licença de uso e autoria
 
+[![Domínio Público](../img/public-domain.png)](UNLICENSE)
+
 Exceto onde explicitado contrário, todas são de autoria da
 [Etica.AI](https://etica.ai) e liberadas sob domínio publico. Citação de autoria
 é bem vinda, porém não é obrigatória e você é livre para reusar em outros

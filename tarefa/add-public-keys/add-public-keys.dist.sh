@@ -37,7 +37,7 @@
 ### Server 1 ___________________________________________________________________
 
 ssh-keygen -R EXAMPLE.COM
-ssh-keyscan  EXAMPLE.COM >> ~/.ssh/known_hosts
+ssh-keyscan EXAMPLE.COM >> ~/.ssh/known_hosts
 sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa.pub root@EXAMPLE.COM
 # sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa_otherkey.pub root@EXAMPLE.COM
 # sshpass -p PASSWORD ssh root@EXAMPLE.COM "echo 'ssh-rsa ABCFG.........Z== otherkey@EXAMPLE.COM' | tee -a ~/.ssh/authorized_keys"
@@ -48,7 +48,7 @@ ssh-keygen -R EXAMPLE.ORG
 ssh-keyscan  EXAMPLE.ORG >> ~/.ssh/known_hosts
 sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa.pub root@EXAMPLE.ORG
 # sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa_otherkey.pub root@EXAMPLE.ORG
-# sshpass -p PASSWORD ssh root@EXAMPLE.COM "echo 'ssh-rsa ABCFG.........Z== otherkey@EXAMPLE.ORG' | tee -a ~/.ssh/authorized_keys"
+# sshpass -p PASSWORD ssh root@EXAMPLE.ORG "echo 'ssh-rsa ABCFG.........Z== otherkey@EXAMPLE.ORG' | tee -a ~/.ssh/authorized_keys"
 
 ### Server 3 ___________________________________________________________________
 ### Server 4 ___________________________________________________________________

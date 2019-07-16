@@ -66,10 +66,9 @@ estrutura de URLs semelhante a esta:
                 - [paas-host](#paas-host)
                 - [tsuru-installer](#tsuru-installer)
             - [Requisitos](#requisitos)
-                - [Seu computador local](#seu-computador-local)
+                - [No seu nó de controle](#no-seu-nó-de-controle)
                     - [Instalação do Ansible](#instalação-do-ansible)
                 - [Servidores remotos](#servidores-remotos)
-                - [Acompanhar resultado to tsuru install-create](#acompanhar-resultado-to-tsuru-install-create)
 - [Licença](#licença)
     - [Licença de aguia-pescadora-ansible-playbooks](#licença-de-aguia-pescadora-ansible-playbooks)
 
@@ -192,24 +191,10 @@ irá alertar.
 
 #### Requisitos
 
-##### Seu computador local
+##### No seu nó de controle
 
 ###### Instalação do Ansible
-Visite <https://docs.ansible.com/> e escolha uma forma de instalação mais
-apropriada para seu sistema operacional e instale no seu computador local (ou
-no computador que remoto que pretende usar). Note que Ansible não requer agente
-nos computadores administrados por ele.
-
-Por exemplo no meu caso, um Ubuntu 16.04 LTS Desktop, preferi usar o
-[PPA oficial da Ansible](https://launchpad.net/~ansible/+archive/ubuntu/ansible)
-em vez do padrão de sitema por estar mais atualizado.
-
-```bash
-sudo apt update
-sudo apt install software-properties-common
-sudo apt-add-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible
-```
+Veja [tarefa/ansible-install](tarefa/ansible-install).
 
 ##### Servidores remotos
 
@@ -224,18 +209,6 @@ servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
 - **Autenticação por chave privada**
     - Caso opte por instalar com o tldr.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
-
-##### Acompanhar resultado to tsuru install-create
-
-Não é trivial exibir na mesma tela de acompanhamento do Ansible o resultado de
-um comando shell em tempo real, porém é salvo um arquivo de log na mesma pasta
-em que os arquivos install-config.yml e install-compose.yml estão.
-
-```bash
-tail -f tsuru-initialization-configs/tsuru-install.log
-```
-
-Note que o arquivo acima inclusive a senha do administrador inicial.
 
 # Licença
 

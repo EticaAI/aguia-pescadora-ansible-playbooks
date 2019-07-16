@@ -1,8 +1,22 @@
 # ansible-install
-Esta pasta contém scripts que explicam como instalar um nó de controle de
-Ansible. Note que apenas o nó de controle (por exemplo, seu computador local,
-ou então um computador remoto que você usaria para controlar si mesmo ou outros
-da rede dele) é que precisam ter Ansible instalado.
+
+## O que é Ansible?
+O [Ansible](https://www.ansible.com/) é uma plataforma de automação de TI
+radicalmente simples que facilita a implantação de seus aplicativos e sistemas.
+É gratúito, de código aberto e especialmente útil como uma escolha de
+Infraestrutura Como Código para evitar aprisionamento tecnológico.
+
+Você pode acessar a documentação oficial em <https://docs.ansible.com/> e
+documentação parcialmente traduzida para português em <http://ansible-br.org/>.
+
+## Sobre o ansible-install
+Esta pasta contém scripts que documentam como instalar o Ansible na máquina
+(que pode ser seu computador local ou servidor remoto) e que atuará
+**como nó de controle**.
+
+Não é preciso instalar ele nas máquinas que ele controlará. Ele as acessa por
+você e baseado nos "playbooks" (seus guias de instruções em YAML) que documentam
+o estado desejado que o(s) servidores remotos deveriam estar ele fará o resto.
 
 # Licença
 [![Domínio Público](../../img/public-domain.png)](UNLICENSE)
