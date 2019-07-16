@@ -1,1 +1,3 @@
-add-public-keys.sh
+*
+!add-public-keys.dist.sh
+!README.md
