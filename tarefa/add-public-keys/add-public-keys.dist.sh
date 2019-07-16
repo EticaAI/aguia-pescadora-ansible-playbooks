@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #===============================================================================
 #
@@ -8,9 +7,20 @@
 #                 vi add-public-keys.sh
 #                 ./add-public-keys.sh
 #
-#   DESCRIPTION:  
+#   DESCRIPTION:  Shell script to, based on a hardcored password, add public
+#                 keys to all target servers without human intervention to
+#                 accept if is first time login.
+#                 Already will try to remove previous fingerprint from server
+#                 to avoid the warnings.
 #
-#       OPTIONS:  ---
+#       OPTIONS:  Password          : "PASSWORD"
+#                 Public Key to add : "~/.ssh/id_rsa.pub"
+#                 User              : "root"
+#                 Server1           : "EXAMPLE.COM"
+#                 Server2           : "EXAMPLE.ORG"
+#                 Server3...
+#                 Server4...
+#
 #  REQUIREMENTS:  sshpass
 #                 ssh-copy-id
 #          BUGS:  ---
@@ -25,26 +35,21 @@
 #===============================================================================
 
 ### Server 1 ___________________________________________________________________
-## Variaveis para customizar:
-## Servidor remoto:       example.com
-## Senha root:            RootPasswordExampleCom
-## (opcional) publickey:  ~/.ssh/id_rsa.pub
 
-ssh-keygen -R example.com
-ssh-keyscan  example.com >> ~/.ssh/known_hosts
-sshpass -p RootPasswordExampleCom ssh-copy-id -i ~/.ssh/id_rsa.pub root@example.com
-# sshpass -p RootPasswordExampleCom ssh root@example.com "echo 'ssh-rsa ABCFG.........Z== otherkey@example.com' | tee -a ~/.ssh/authorized_keys"
+ssh-keygen -R EXAMPLE.COM
+ssh-keyscan  EXAMPLE.COM >> ~/.ssh/known_hosts
+sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa.pub root@EXAMPLE.COM
+# sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa_otherkey.pub root@EXAMPLE.COM
+# sshpass -p PASSWORD ssh root@EXAMPLE.COM "echo 'ssh-rsa ABCFG.........Z== otherkey@EXAMPLE.COM' | tee -a ~/.ssh/authorized_keys"
 
 ### Server 2 ___________________________________________________________________
-## Variaveis para customizar:
-## Servidor remoto:       example.org
-## Senha root:            RootPasswordExampleOrg
-## (opcional) publickey:  ~/.ssh/id_rsa.pub
 
-ssh-keygen -R example.org
-ssh-keyscan  example.org >> ~/.ssh/known_hosts
-sshpass -p RootPasswordExampleCom ssh-copy-id -i ~/.ssh/id_rsa.pub root@example.org
-# sshpass -p RootPasswordExampleOrg ssh root@example.com "echo 'ssh-rsa ABCFG.........Z== otherkey@example.org' | tee -a ~/.ssh/authorized_keys"
+ssh-keygen -R EXAMPLE.ORG
+ssh-keyscan  EXAMPLE.ORG >> ~/.ssh/known_hosts
+sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa.pub root@EXAMPLE.ORG
+# sshpass -p PASSWORD ssh-copy-id -i ~/.ssh/id_rsa_otherkey.pub root@EXAMPLE.ORG
+# sshpass -p PASSWORD ssh root@EXAMPLE.COM "echo 'ssh-rsa ABCFG.........Z== otherkey@EXAMPLE.ORG' | tee -a ~/.ssh/authorized_keys"
 
 ### Server 3 ___________________________________________________________________
-# ....
+### Server 4 ___________________________________________________________________
+### Server N ...
