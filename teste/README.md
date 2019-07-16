@@ -1,20 +1,24 @@
 # Águia Pescadora - Testes
+> **:warning: Muito cuidado ao executar automações da `teste/` se você tem
+pouca experiência com Ansible e/ou está aplicando em uma máquina em produção
+(ou seu computador de trabalho) :warning:**
+
 A pasta `teste` do [Ansible Playbooks da Águia Pescadora](https://github.com/EticaAI/aguia-pescadora-ansible-playbooks)
 contém pequenos scripts que não se encaixam em outras categorias mas podem
 servir para fazer pequenos testes.
 
-<!--
-Note que algumas tarefas desta pasta são tão simples e escritos para quem não
-é especialista (ou que até é, mas quer fazer algo rápido) que **é justamente
-melhor você copiar e colar o que atende sua necessidade em vez de reusar ou
-clonar este repositório inteiro**.
--->
-
 ## Veja também
 
-- <https://github.com/ansible/test-playbooks>
-- <https://docs.ansible.com/ansible/latest/reference_appendices/test_strategies.html>
+### Outras referências de testes em Ansible
 
+Veja <https://github.com/ansible/test-playbooks>. A documentação oficial é
+ótima, porém este repositório tem arquivos que podem ser úteis se você já tem
+uma idéia geral.
+
+### Informações úteis sobre como executar testes
+
+- <https://docs.ansible.com/ansible/latest/reference_appendices/test_strategies.html>
+- <https://docs.ansible.com/ansible/latest/user_guide/playbooks_checkmode.html>
 
 # Licença
 

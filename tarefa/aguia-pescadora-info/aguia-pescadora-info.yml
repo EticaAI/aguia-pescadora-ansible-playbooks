@@ -1,0 +1,17 @@
+---
+
+# ansible-playbook -i hosts aguia-pescadora-info.yml
+
+- hosts: all
+  tasks:
+#    - ping:
+    - name: "NGINX test result"
+      debug:
+        msg: "NGINX found"
+      when: "'nginx' in ansible_facts.packages"
+      ignore_errors: yes
+    - name: "OpenResty test result"
+      debug:
+        msg: "OpenResty found"
+      when: "'openresty' in ansible_facts.packages"
+      ignore_errors: yes
