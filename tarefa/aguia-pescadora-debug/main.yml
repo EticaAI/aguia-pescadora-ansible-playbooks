@@ -1,0 +1,38 @@
+---
+# FILE: tarefa/aguia-pescadora-debug/main.yml
+
+#> package_facts esta dando erro _"[WARNING]: Requested package manager apt was not usable by this module: 'APT' object has no attribute '_cache'"_
+#> 
+#> - https://github.com/ansible/ansible/pull/56008
+#> - https://github.com/bcoca/ansible/blob/1b7e421cf22612160dbdaac6627bcd19cf0448f8/lib/ansible/modules/packaging/os/package_facts.py
+#> 
+#> Hotfix:
+#> trocar `/home/fititnt/anaconda3/lib/python3.7/site-packages/ansible/modules/packaging/os/package_facts.py`
+#>
+#> por `https://github.com/bcoca/ansible/blob/1b7e421cf22612160dbdaac6627bcd19cf0448f8/lib/ansible/modules/packaging/os/package_facts.py
+
+- hosts: all
+  tasks:
+    - name: Obtem informações também de pacotes instalados
+      package_facts:
+        manager: apt
+    - name: Imprime informações sobre pacotes instalados
+      debug:
+        var: ansible_facts
+
+    - name: "htop test result"
+      debug:
+        msg: "htop found"
+      when: "'htop' in ansible_facts.packages"
+
+    - name: "NGINX test result"
+      debug:
+        msg: "NGINX found"
+      when: "'nginx' in ansible_facts.packages"
+      ignore_errors: yes
+
+    - name: "OpenResty test result"
+      debug:
+        msg: "OpenResty found"
+      when: "'openresty' in ansible_facts.packages"
+      ignore_errors: yes

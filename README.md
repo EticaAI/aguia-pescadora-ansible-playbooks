@@ -69,6 +69,9 @@ estrutura de URLs semelhante a esta:
                 - [No seu nó de controle](#no-seu-nó-de-controle)
                     - [Instalação do Ansible](#instalação-do-ansible)
                 - [Servidores remotos](#servidores-remotos)
+- [Avançado](#avançado)
+    - [Tarefas de auxílio](#tarefas-de-auxílio)
+    - [Testes](#testes)
 - [Licença](#licença)
     - [Licença de aguia-pescadora-ansible-playbooks](#licença-de-aguia-pescadora-ansible-playbooks)
 
@@ -209,6 +212,16 @@ servidores remotos estarão com pacotes instalados e prontos para uso inicial**.
 - **Autenticação por chave privada**
     - Caso opte por instalar com o tldr.yml o `tsuru-client` requer que a
       chave privada usada no momento da instalação seja sem senha.
+
+# Avançado
+
+## Tarefas de auxílio
+Veja pasta [tarefa](tarefa/)
+
+## Testes
+> **:warning: Muito cuidado ao executar automações da `teste/` :warning:**
+
+Veja pasta [teste](teste/).
 
 # Licença
 
