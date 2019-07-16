@@ -1,4 +1,7 @@
 # add-public-keys
+**TL;DR: documento e script explicam uma forma de permitir login em servidor
+remoto sem necessidade de senha, isto é, por par de chaves SSHs.**
+
 Script simples que permite adicionar chaves publicas e permitir autenticação sem
 senha. Especialmente útil máquinas virtuais ou dedicadas em que o fornecedor
 apenas fornece uma senha para fazer autenticação.

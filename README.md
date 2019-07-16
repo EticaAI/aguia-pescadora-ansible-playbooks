@@ -249,6 +249,6 @@ _@TODO: explicar sobre licenças extras (fititnt, 2019-06-30 05:53 BRT)_
 
 [![Domínio Público](img/public-domain.png)](UNLICENSE)
 
-Na medida do possível segundo a lei, [Emerson Rocha](https://github.com/fititnt)
+Na medida do possível segundo a lei, [Etica.AI](https://etica.ai)
 renunciou a todos os direitos autorais e direitos conexos ou vizinhos a este
 trabalho para o [Domínio Público](UNLICENSE).
