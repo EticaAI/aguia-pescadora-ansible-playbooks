@@ -29,23 +29,31 @@
   - name: "ufw status verbose print (before)"
     debug: var=ufw_status_verbose1.stdout_lines
 
-## Port 22 (ssh) tcp: limit ____________________________________________________
-  - name: "Port 22 (ssh) tcp: limit"
+## :22 (SSH) tcp LIMIT _________________________________________________________
+  - name: ":22 (SSH) tcp LIMIT"
     ufw:
       rule: limit
       port: "22"
       proto: tcp
-      comment: "aguia-pescadora/firewall: 22 rate limit"
+      comment: "[aguia-pescadora/firewall] :22 (SSH) tcp LIMIT"
 
-#- name: Allow SSH in UFW
-#  ufw: rule=allow port=22 proto=tcp
+## :80 (HTTP) tcp ALLOW IN * ______________________________________________________
+  - name: ":80 (HTTP) tcp ALLOW IN *"
+    ufw:
+      rule: allow
+      port: "80"
+      proto: tcp
+      comment: "[aguia-pescadora/firewall] :80 (HTTP) tcp ALLOW IN *"
 
-#- name: Set firewall default policy
-#  ufw: state=enabled policy=reject
-#  sudo: true
+## :443 (HTTPS) tcp ALLOW IN * ____________________________________________________
+  - name: ":443 (HTTPS) tcp ALLOW IN *"
+    ufw:
+      rule: allow
+      port: "443"
+      proto: tcp
+      comment: "[aguia-pescadora/firewall] :443 (HTTPS) tcp ALLOW IN *"
 
 ## Enable UFW (default: deny all) ______________________________________________
-
   - name: "Enable UFW (policy: deny)"
     ufw:
       state: enabled

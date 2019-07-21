@@ -1,18 +1,49 @@
 # firewall
 
-> **:warning: Cuidado ao usar esta tarefa diretamente e/ou em produção em especial sem especificar os hosts :warning:**
+> **:warning: Use `--check` (modo do Ansible testar sem executar) mesmo que você
+saiba o que está fazendo**
+
+> :green_heart: `firewall.yml`, para proteger usuários, não irá bloquear acesso
+a porta 22 SSH por padrão (porém irá limitar brute forces). Então _na pior das
+hipóteses_ poderá abrir porta 22 que não estava bloqueada antes e/ou bloquear
+outras portas mas não vai trancar um usuário de acessar o próprio servidor.
 
 ```bash
 # Caso esteja no diretório tarefa/firewall/, use:
+ansible-playbook -i hosts firewall.yml --check
 ansible-playbook -i hosts firewall.yml
 
 # Do contrário, use o caminho completo
+ansible-playbook -i inventory/1-node-example/inventory.ini tarefa/firewall/firewall.yml --check
 ansible-playbook -i inventory/1-node-example/inventory.ini tarefa/firewall/firewall.yml
 ```
 
-## Testar antes de aplicar
+## Debug
 
-_TODO: considerar https://github.com/ansible/ansible/issues/45604 (fititnt, 2019-07-21 05:07 BRT)_
+### Acessando maquina remota
+
+```bash
+ssh user@example.com
+sudo ufw status verbose
+```
+
+### Escanear portas com NMAP
+
+```bash
+# Escaneia hosts remotos com programa NMAP instalado localmente (scan rápido)
+ansible-playbook -i hosts firewall-debug.yml
+```
+
+### Escanear usando serviços gratúitos externos
+
+Alguns sites podem permitir que você escaneie de um IP que não deveria acessar
+portas de seu servidor. Note que maioria dos hosts gratuitos não permite
+escaneamento completo.
+
+- <http://www.t1shopper.com/tools/port-scan/>
+- <https://pentest-tools.com/network-vulnerability-scanning/tcp-port-scanner-online-nmap>
+- <http://www.ipv6scanner.com/cgi-bin/main.py>
+- <https://hackertarget.com/nmap-online-port-scanner/>
 
 # Licença
 [![Domínio Público](../../img/public-domain.png)](UNLICENSE)

@@ -1,0 +1,29 @@
+---
+# ---------------------------------------------------------------------------- #
+# LICENSE: Public Domain <https://unlicense.org/>                              #
+#                                                                              #
+# Work dedicated to the public domain. This file (whole or parts) can          #
+# be used without needing to quote from previous source. You can relicense.    #
+# -----------------------------------------------------------------------------#
+
+- hosts: all
+  gather_facts: no
+  tasks:
+
+## [localhost] nmap {{ inventory_hostname }} ___________________________________
+  - name: "[localhost] nmap {{ inventory_hostname }}"
+    shell: "nmap {{ inventory_hostname }}"
+    delegate_to: localhost
+    register: localhost_nmap
+
+  - name: "ufw status verbose print (after)"
+    debug: var=localhost_nmap.stdout_lines
+
+## Recomend remote scanners ___________________________________
+  - name: "[remote hosts] try NMAP from free scanners to {{ inventory_hostname }}"
+    debug:
+      msg: "http://www.t1shopper.com/tools/port-scan/ , https://pentest-tools.com/network-vulnerability-scanning/tcp-port-scanner-online-nmap, http://www.ipv6scanner.com/cgi-bin/main.py, https://hackertarget.com/nmap-online-port-scanner/"
+    #when: "1 = 1"
+
+## TODO: implementar debug da maquina local usando nmap (fititnt, 2019-07-21 06:29 BRT)
+## TODO: implementar debug de maquina remota apontando para alvo (fititnt, 2019-07-21 06:29 BRT)
