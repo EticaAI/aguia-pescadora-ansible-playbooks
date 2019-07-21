@@ -1,6 +1,10 @@
 ---
 # FILE: tarefa/aguia-pescadora-debug/main.yml
 
+# TODO:considerar Mitogem, Pipelining para aumentar velocidade 
+#      https://www.toptechskills.com/ansible-tutorials-courses/speed-up-ansible-playbooks-pipelining-mitogen/
+#      (fititnt, 2019-07-16 07:24 BRT)
+
 #> package_facts esta dando erro _"[WARNING]: Requested package manager apt was not usable by this module: 'APT' object has no attribute '_cache'"_
 #> 
 #> - https://github.com/ansible/ansible/pull/56008
@@ -16,9 +20,9 @@
     - name: Obtem informações também de pacotes instalados
       package_facts:
         manager: apt
-    - name: Imprime informações sobre pacotes instalados
-      debug:
-        var: ansible_facts
+    #- name: Imprime informações sobre pacotes instalados
+    #  debug:
+    #    var: ansible_facts
 
     - name: "htop test result"
       debug:
