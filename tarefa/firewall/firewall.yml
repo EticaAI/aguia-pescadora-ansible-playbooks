@@ -37,7 +37,7 @@
       proto: tcp
       comment: "[aguia-pescadora/firewall] :22 (SSH) tcp LIMIT"
 
-## :80 (HTTP) tcp ALLOW IN * ______________________________________________________
+## :80 (HTTP) tcp ALLOW IN * ___________________________________________________
   - name: ":80 (HTTP) tcp ALLOW IN *"
     ufw:
       rule: allow
@@ -45,13 +45,38 @@
       proto: tcp
       comment: "[aguia-pescadora/firewall] :80 (HTTP) tcp ALLOW IN *"
 
-## :443 (HTTPS) tcp ALLOW IN * ____________________________________________________
+## :443 (HTTPS) tcp ALLOW IN * _________________________________________________
   - name: ":443 (HTTPS) tcp ALLOW IN *"
     ufw:
       rule: allow
       port: "443"
       proto: tcp
       comment: "[aguia-pescadora/firewall] :443 (HTTPS) tcp ALLOW IN *"
+
+## Basic DMZ with firewall only ________________________________________________
+  - name: "cluster_dmz_ips (convert string to list)"
+    set_fact:
+      cluster_dmz_ips_list: "{{ cluster_dmz_ips.split(',') }}"
+      #other_fact: "{{ local_var * 2 }}"
+      #another_fact: "{{ some_registered_var.results | map(attribute='ansible_facts.some_fact') | list }}"
+    when: "cluster_dmz_ips is defined and cluster_dmz_ips != '' and cluster_dmz_ips != None"
+
+  - name: "cluster_dmz_ips (debug 1)"
+    debug: var=cluster_dmz_ips
+    when: "cluster_dmz_ips is defined"
+
+  - name: "cluster_dmz_ips (debug 2)"
+    debug: var=cluster_dmz_ips_list
+    when: "cluster_dmz_ips is defined"
+
+## :* (DMZ) ALLOW IN * .........................................................
+  - name: "cluster_dmz_ips"
+    ufw:
+      rule: allow
+      src: '{{ item }}'
+      comment: "[aguia-pescadora/firewall] :* (DMZ) ALLOW IN *"
+    loop: "{{ cluster_dmz_ips_list }}"
+    when: "cluster_dmz_ips_list is defined"
 
 ## Enable UFW (default: deny all) ______________________________________________
   - name: "Enable UFW (policy: deny)"

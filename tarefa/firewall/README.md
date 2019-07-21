@@ -8,6 +8,8 @@ a porta 22 SSH por padrão (porém irá limitar brute forces). Então _na pior d
 hipóteses_ poderá abrir porta 22 que não estava bloqueada antes e/ou bloquear
 outras portas mas não vai trancar um usuário de acessar o próprio servidor.
 
+## Uso para 1 Host
+
 ```bash
 # Caso esteja no diretório tarefa/firewall/, use:
 ansible-playbook -i hosts firewall.yml --check
@@ -17,6 +19,27 @@ ansible-playbook -i hosts firewall.yml
 ansible-playbook -i inventory/1-node-example/inventory.ini tarefa/firewall/firewall.yml --check
 ansible-playbook -i inventory/1-node-example/inventory.ini tarefa/firewall/firewall.yml
 ```
+
+## Uso para um grupo de hosts
+
+```bash
+# Caso esteja no diretório tarefa/firewall/, use:
+ansible-playbook -i hosts-cluster firewall.yml --check
+ansible-playbook -i hosts-cluster firewall.yml
+```
+A seguir um asciinema com exemplo de uso
+
+[![asciicast](https://asciinema.org/a/258426.svg)](https://asciinema.org/a/258426)
+
+<!--
+ansible-playbook -i hosts-cluster firewall.yml
+-->
+<!--
+Para gravar asciinema
+
+asciinema rec aguia-pescadora-tarefa-firewall--cluster-2019-07-21-09-21 --title="Águia Pescadora/Tarefa/Firewall, 'hosts-cluster' v2019-07-21-09-21" --idle-time-limit=10
+
+-->
 
 ## Debug
 
@@ -50,4 +73,4 @@ escaneamento completo.
 
 Na medida do possível segundo a lei, [Etica.AI](https://etica.ai)
 renunciou a todos os direitos autorais e direitos conexos ou vizinhos a este
-trabalho para o [Domínio Público](UNLICENSE).
+trabalho para o [Domínio Público](../../UNLICENSE).
