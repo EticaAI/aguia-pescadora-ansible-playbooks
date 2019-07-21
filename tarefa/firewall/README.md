@@ -4,10 +4,10 @@
 
 ```bash
 # Caso esteja no diretório tarefa/firewall/, use:
-ansible-playbook firewall.yml
+ansible-playbook -i hosts firewall.yml
 
 # Do contrário, use o caminho completo
-ansible-playbook tarefa/firewall/firewall.yml
+ansible-playbook -i inventory/1-node-example/inventory.ini tarefa/firewall/firewall.yml
 ```
 
 ## Testar antes de aplicar

@@ -1,11 +1,41 @@
 ---
+# ---------------------------------------------------------------------------- #
+# LICENSE: Public Domain <https://unlicense.org/>                              #
+#                                                                              #
+# Work dedicated to the public domain. This file (whole or parts) can          #
+# be used without needing to quote from previous source. You can relicense.    #
+# -----------------------------------------------------------------------------#
 
 # firewall.yml
+# @see https://docs.ansible.com/ansible/latest/modules/ufw_module.html
 
-- name: Ubuntu? Debian?
-  fail:
-    msg: "Ubuntu/Debian fail"
-  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+- hosts: all
+  gather_facts: no
+  tasks:
+
+  - name: Ubuntu? Debian?
+    fail:
+      msg: "Ubuntu/Debian fail"
+    when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+
+## ufw status verbose  (before) ________________________________________________
+
+  - name: "ufw status verbose (before)"
+    shell: "ufw status verbose"
+    become: "yes"
+    changed_when: false
+    register: ufw_status_verbose1
+
+  - name: "ufw status verbose print (before)"
+    debug: var=ufw_status_verbose1.stdout_lines
+
+## Port 22 (ssh) tcp: limit ____________________________________________________
+  - name: "Port 22 (ssh) tcp: limit"
+    ufw:
+      rule: limit
+      port: "22"
+      proto: tcp
+      comment: "aguia-pescadora/firewall: 22 rate limit"
 
 #- name: Allow SSH in UFW
 #  ufw: rule=allow port=22 proto=tcp
@@ -13,3 +43,20 @@
 #- name: Set firewall default policy
 #  ufw: state=enabled policy=reject
 #  sudo: true
+
+## Enable UFW (default: deny all) ______________________________________________
+
+  - name: "Enable UFW (policy: deny)"
+    ufw:
+      state: enabled
+      policy: deny
+
+## ufw status verbose  (after) ________________________________________________
+  - name: "ufw status verbose (after)"
+    shell: "ufw status verbose"
+    become: "yes"
+    changed_when: false
+    register: ufw_status_verbose2
+
+  - name: "ufw status verbose print (after)"
+    debug: var=ufw_status_verbose2.stdout_lines
